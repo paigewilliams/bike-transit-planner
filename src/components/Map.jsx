@@ -8,12 +8,9 @@ const MapStyles = styled.div`
   background-color: palevioletred;
 `;
 
-function Map(){
-  return(
-    <MapStyles>
-      <h1>Map works</h1>
-    </MapStyles>
-  );
+class Map extends React.Component {
+
+  
 }
 
 export default Map;

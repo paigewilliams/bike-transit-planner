@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const FormStyles = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 5rem;
+  margin-bottom: 7rem;
 `;
 
 const TimeLine = styled.div`

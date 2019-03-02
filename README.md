@@ -42,10 +42,9 @@ A web application that helps people in Portland plan their multi-modal trips. Th
 
 ## Setup <a name="setup"></a>
 * Install Node.js
-* Install React, react-router and react-redux
-* Clone this project with `git clone https://github.com/TanviCodeLife/belong`
-* Run npm install to install dependencies
-* Run npm run start to build and serve the project
+* Clone this project with `git clone https://github.com/paigewilliams/bike-transit-planner`
+* Run `npm install` to install dependencies
+* Run `npm run start` to build and serve the project
 * View the project in any browser at `http://localhost:8080/`
 
 ## Support and contact details

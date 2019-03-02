@@ -1,5 +1,13 @@
 import React from 'react';
 import TimeField from 'react-simple-timefield';
+import { Formkik, Form, Field, ErrorMessage } from 'formik';
+import styled from 'styled-components';
+
+const FormStyles = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`
 
 function RouteForm(){
   let _startAddress = null;
@@ -8,7 +16,7 @@ function RouteForm(){
   let _date = null;
   let _miles = null;
   return(
-    <div>
+    <FormStyles>
       <form>
         <input
           type='text'
@@ -38,7 +46,7 @@ function RouteForm(){
        <button type='submit'>Find Route</button>
 
       </form>
-    </div>
+    </FormStyles>
   )
 }
 

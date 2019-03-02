@@ -1,11 +1,42 @@
 {
-  "name": "capstone",
+  "name": "bike-transit-planner",
   "version": "1.0.0",
-  "description": "\"a trip planning app for bike and transit\"",
+  "description": "app to plan trips using bike and transit data",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "eslint src/** src/**/**; exit 0",
+    "lint-fix": "eslint src/** src/**/** --fix; exit 0",
+    "test": "jest; exit 0",
+    "start": "webpack-dev-server"
   },
-  "author": "\"Paige Williams\"",
-  "license": "ISC"
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "16.8.1",
+    "react-dom": "16.8.1",
+    "react-redux": "^5.0.6",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "styled-components": "^4.1.3",
+    "uuid": "^3.2.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.3.1",
+    "@babel/preset-react": "^7.0.0",
+    "babel-loader": "^8.0.5",
+    "babel-plugin-styled-components": "^1.10.0",
+    "eslint": "^5.13.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-react": "^7.5.1",
+    "file-loader": "^1.1.6",
+    "html-webpack-plugin": "^2.29.0",
+    "jest": "^20.0.4",
+    "react-hot-loader": "^3.0.0-beta.7",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.4.0",
+    "webpack-dev-server": "^2.5.0"
+  }
 }

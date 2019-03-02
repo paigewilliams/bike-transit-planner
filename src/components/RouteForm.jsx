@@ -14,7 +14,7 @@ const TimeLine = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-`
+`;
 
 function RouteForm(){
   let _startAddress = null;
@@ -31,32 +31,32 @@ function RouteForm(){
           id='start'
           placeholder='Start Address'
           ref={(input)=> {_startAddress = input;}}/>
-          <br/>
+        <br/>
         <input
           type='text'
           id='end'
           placeholder='Destination Address'
           ref={(input)=> {_endAddress = input;}}/>
-          <br/>
+        <br/>
         <TimeLine>
-        <select ref={(option)=> {_departOrArrive = option;}}>
-          <option value="depart">Depart</option>
-          <option value ="arrive">Arrive</option>
-        </select>
-        <p>by</p>
-        <TimeField />
-        <input
-          type='date'
-          id='date'
-          ref={(input)=> {_date = input;}}/>
-         </TimeLine> 
+          <select ref={(option)=> {_departOrArrive = option;}}>
+            <option value="depart">Depart</option>
+            <option value ="arrive">Arrive</option>
+          </select>
+          <p>by</p>
+          <TimeField />
+          <input
+            type='date'
+            id='date'
+            ref={(input)=> {_date = input;}}/>
+        </TimeLine> 
         <br />
         <input 
           type='number'
           id='miles'
           placeholder='Maximum miles biked'
           ref={(input)=> {_miles = input;}}/> 
-         <br /> 
+        <br /> 
         <button type='submit'>Find Route</button>
 
       </form>

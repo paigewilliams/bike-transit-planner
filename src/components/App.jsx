@@ -5,12 +5,12 @@ import Sidebar from './Sidebar';
 import styled from 'styled-components';
 import { createGlobalStyle } from 'styled-components';
 
- const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
   body {
     @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
     font-family: 'Nunito', sans-serif;
   };
-`
+`;
 
 const Container = styled.div`
   display: grid;

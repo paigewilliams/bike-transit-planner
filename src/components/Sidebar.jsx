@@ -1,6 +1,7 @@
 import React from 'react';
 import RouteForm from './RouteForm';
 import styled from 'styled-components';
+import ResultList from './ResultList';
 
 const SidebarStyles = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ function Sidebar(){
   return(
     <SidebarStyles>
       <RouteForm />
+      <ResultList />
     </SidebarStyles>
   )
 }

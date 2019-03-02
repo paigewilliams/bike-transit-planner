@@ -6,13 +6,9 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 15% auto;
-  grid-template-columns: 33% auto;
-  grid-gap: 1rem;
-  grid-template-areas: 
-    "header"
-    "sidebar"
-    "map"
+  grid-template-rows: 10vw 40vw;
+  grid-template-columns: 25% 75%;
+
 `
 
 function App() {

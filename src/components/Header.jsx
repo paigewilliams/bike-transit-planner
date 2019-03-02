@@ -2,11 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 const HeaderStyle = styled.header`
-  display: block;
-  color: white;
-  background: tomato;
-  text-transform: uppercase;
-  z-index: 1;
+  grid-column: 1 / span 2;
+  background-color: #F2B661;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `
 
 function Header(){

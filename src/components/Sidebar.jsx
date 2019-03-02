@@ -6,7 +6,7 @@ const SidebarStyles = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  
   background-color: papayawhip;
 
 `
@@ -15,7 +15,6 @@ const SidebarStyles = styled.div`
 function Sidebar(){
   return(
     <SidebarStyles>
-      <h1>Sidebar works</h1>
       <RouteForm />
     </SidebarStyles>
   )

@@ -1,5 +1,6 @@
 import React from 'react';
 import Result from './Result';
+import styled from 'styled-components';
 
 const fakeResults = {
   0 : {
@@ -38,22 +39,28 @@ const fakeResults = {
     time: '1 minute',
     id: 5
   } 
-}
+};
+
+const ResultListStyles = styled.div`
+  display: flex;
+  flex-direction: column;
+  
+`
 
 function ResultList(){
   return (
-    <div>
+    <ResultListStyles>
       <h3>Results:</h3>
       {Object.keys(fakeResults).map(function(resultId){
-        const result = fakeResults[resultId]
+        const result = fakeResults[resultId];
         return <Result
-        mode={result.mode}
-        direction={result.direction}
-        time={result.time}
-        key={result.id} />
+          mode={result.mode}
+          direction={result.direction}
+          time={result.time}
+          key={result.id} />;
       })}
-    </div>
-  )
+    </ResultListStyles>
+  );
 }
 
 export default ResultList;

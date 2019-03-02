@@ -6,14 +6,14 @@ const MapStyles = styled.div`
   align-items: center;
   justify-content: center;
   background-color: palevioletred;
-`
+`;
 
 function Map(){
   return(
     <MapStyles>
       <h1>Map works</h1>
     </MapStyles>
-  )
+  );
 }
 
 export default Map;

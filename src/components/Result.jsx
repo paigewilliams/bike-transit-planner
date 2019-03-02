@@ -6,7 +6,7 @@ function Result(props){
       <p>{props.mode} to {props.direction}</p>
       <p>Time: {props.time}</p>
     </div>
-  )
+  );
 }
 
 export default Result;

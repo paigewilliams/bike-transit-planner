@@ -6,10 +6,10 @@ import styled from 'styled-components';
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 7vw 40vw;
+  grid-template-rows: 7vw 43vw;
   grid-template-columns: 25% 75%;
 
-`
+`;
 
 function App() {
   return(
@@ -21,4 +21,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

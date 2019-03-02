@@ -8,7 +8,9 @@ const SidebarStyles = styled.div`
   flex-direction: column;
   align-items: center;
   background-color: papayawhip;
-`
+  overflow-y: scroll;
+  postion: fixed;
+`;
 
 
 function Sidebar(){
@@ -17,7 +19,7 @@ function Sidebar(){
       <RouteForm />
       <ResultList />
     </SidebarStyles>
-  )
+  );
 }
 
 export default Sidebar;

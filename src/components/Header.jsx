@@ -7,14 +7,14 @@ const HeaderStyle = styled.header`
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 function Header(){
   return(
     <HeaderStyle>
       <h1>Header works</h1>
     </HeaderStyle>
-  )
+  );
 }
 
 export default Header;

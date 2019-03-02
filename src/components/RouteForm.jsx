@@ -7,7 +7,6 @@ const FormStyles = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 5rem;
-  white-space: no-wrap;
 `;
 
 const TimeLine = styled.div`

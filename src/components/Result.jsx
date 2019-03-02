@@ -1,9 +1,10 @@
 import React from 'react';
 
-function Result(){
+function Result(props){
   return (
     <div>
-      <h4>Result</h4>
+      <p>{props.mode} to {props.direction}</p>
+      <p>Time: {props.time}</p>
     </div>
   )
 }

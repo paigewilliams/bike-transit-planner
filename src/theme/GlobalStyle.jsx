@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
   body {
-    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
+    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800');
     font-family: 'Nunito', sans-serif;
   };
 
@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
+    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800');
     font-family: 'Nunito', sans-serif;
     text-align: center;
     text-transform: uppercase;
@@ -25,12 +25,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   input {
-    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
+    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800');
     font-family: 'Nunito', sans-serif;
   }
 
   select {
-    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
+    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800');
     font-family: 'Nunito', sans-serif;
   }
 `;

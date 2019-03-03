@@ -6,11 +6,10 @@ import mapboxgl from 'mapbox-gl';
 mapboxgl.accessToken = process.env.API_KEY;
 
 const MapStyles = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: palevioletred;
+  height: 100%;
+  width: 100%;
 `;
+
 
 class Map extends React.Component {
 
@@ -19,7 +18,7 @@ class Map extends React.Component {
     this.state = {
       lat: 45.5122,
       lng: -122.6587,
-      zoom: 12
+      zoom: 11
     };
   }
 
@@ -49,7 +48,7 @@ class Map extends React.Component {
 
     return(
       <div>
-        <div ref={el => this.mapContainer = el} className="absolute top right left bottom" />
+        <MapStyles ref={el => this.mapContainer = el}  />
       </div>
     );
   }

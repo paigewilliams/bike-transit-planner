@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import mapboxgl from 'mapbox-gl';
 
 
-mapboxgl.accessToken = 'process.env.API_KEY';
+mapboxgl.accessToken = process.env.API_KEY;
 
 const MapStyles = styled.div`
   display: flex;
@@ -49,7 +49,7 @@ class Map extends React.Component {
 
     return(
       <div>
-        <div ref={el => this.mapContainer = el} />
+        <div ref={el => this.mapContainer = el} className="absolute top right left bottom" />
       </div>
     );
   }

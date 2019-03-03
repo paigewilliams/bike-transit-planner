@@ -38,7 +38,7 @@ A web application that helps people in Portland plan their multi-modal trips. Th
 * Jest
 * [Trimet Trip Planner API](https://developer.trimet.org/ws_docs/tripplanner_ws.shtml)
 * [Mapbox](https://www.mapbox.com/) 
-
+* Icons from [Good Ware](https://www.flaticon.com/packs/transportation-46)
 
 ## Setup <a name="setup"></a>
 * Install Node.js

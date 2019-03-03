@@ -20,8 +20,6 @@ const Button = styled.button`
   font-size: 1em;
   margin: 1em;
   background-color: tomato;
-  &:hover {
-    background-position: right center;
   }
 `
 

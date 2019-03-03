@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const FormStyles = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 7rem;
+  margin-bottom: 20rem;
 `;
 
 const TimeLine = styled.div`
@@ -26,19 +26,20 @@ const StyledInput = styled.input`
 `
 const StyledSelect = styled.select`
   font-size: 16px;
-  margin-right: 1rem;
+  
 `
 const StyledTime = styled(TimeField)`
   border: none;
   border-bottom: 3px solid tomato;
   background: transparent;
-  font-size: 12px;
+  font-size: 13px;
   width: 100px;
 
 `
 const StyledText = styled.p`
   font-size: 18px;
   margin-right: 1rem;
+  margin-left 1rem;
 `
 
 function RouteForm(){
@@ -70,14 +71,15 @@ function RouteForm(){
           </StyledSelect>
           <StyledText>by</StyledText>
           <StyledTime />
+          <StyledText>on</StyledText>
         </TimeLine> 
-        <StyledText>on</StyledText>
-        <input
+        <TimeLine>
+          <StyledInput
             type='date'
             id='date'
             ref={(input)=> {_date = input;}}/>
-        <br />
-        <input 
+        </TimeLine>
+        <StyledInput 
           type='number'
           id='miles'
           placeholder='Maximum miles biked'

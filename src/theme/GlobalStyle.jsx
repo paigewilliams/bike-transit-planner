@@ -9,6 +9,15 @@ const GlobalStyle = createGlobalStyle`
   button {
     @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
     font-family: 'Nunito', sans-serif;
+    text-align: center;
+    text-transform: uppercase;
+    color: white;
+    border-radius: 3px;
+    border: tomato;
+    transition: 0.5s;
+    padding: 0.25em 1em;
+    font-size: 1em;
+    background-color: tomato;
   }
 
   input {

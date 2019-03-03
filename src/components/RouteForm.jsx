@@ -23,11 +23,11 @@ const StyledInput = styled.input`
   font-size: 18px;
   margin-bottom: 2rem;
   width: 15rem;
-`
+`;
 const StyledSelect = styled.select`
   font-size: 16px;
   
-`
+`;
 const StyledTime = styled(TimeField)`
   border: none;
   border-bottom: 3px solid tomato;
@@ -35,12 +35,12 @@ const StyledTime = styled(TimeField)`
   font-size: 13px;
   width: 100px;
 
-`
+`;
 const StyledText = styled.p`
   font-size: 18px;
   margin-right: 1rem;
   margin-left 1rem;
-`
+`;
 
 function RouteForm(){
   let _startAddress = null;

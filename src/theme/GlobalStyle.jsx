@@ -6,6 +6,10 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Nunito', sans-serif;
   };
 
+  h1 {
+    font-weight: 800;
+  }
+
   button {
     @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
     font-family: 'Nunito', sans-serif;

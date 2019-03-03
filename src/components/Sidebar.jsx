@@ -6,7 +6,7 @@ import ResultList from './ResultList';
 const SidebarStyles = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  margin-left: 1rem;
   background-color: white;
   overflow-y: scroll;
   postion: fixed;

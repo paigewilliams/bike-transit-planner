@@ -9,6 +9,7 @@ const HeaderStyle = styled.header`
   justify-content: space-between;
   margin-left: 1rem;
   margin-right: 1rem;
+  font-weight: 800;
 `;
 
 

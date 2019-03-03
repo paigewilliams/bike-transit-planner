@@ -55,13 +55,13 @@ function RouteForm(){
         <StyledInput
           type='text'
           id='start'
-          placeholder='Start Address'
+          placeholder='Start address'
           ref={(input)=> {_startAddress = input;}}/>
         <br/>
         <StyledInput
           type='text'
           id='end'
-          placeholder='Destination Address'
+          placeholder='Destination address'
           ref={(input)=> {_endAddress = input;}}/>
         <br/>
         <TimeLine>

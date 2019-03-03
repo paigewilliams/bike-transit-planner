@@ -7,27 +7,16 @@ const HeaderStyle = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  margin-left: 1rem;
+  margin-right: 1rem;
 `;
 
-const Button = styled.button`
-  text-align: center;
-  text-transform: uppercase;
-  color: white;
-  border-radius: 3px;
-  transition: 0.5s;
-  padding: 0.25em 1em;
-  font-size: 1em;
-  margin: 1em;
-  background-color: tomato;
-  }
-`
 
 function Header(){
   return(
     <HeaderStyle>
       <h1>Transit & Bike Trip Planner</h1>
-      <Button>Sign In</Button>
+      <button>Sign In</button>
     </HeaderStyle>
   );
 }

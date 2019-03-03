@@ -1,7 +1,7 @@
 # **Bike and Transit Route Planner**
 
 # Contributors
-##### Paige Williams  
+### Paige Williams  
 
 
 ## Description
@@ -11,10 +11,12 @@ A web application that helps people in Portland plan their multi-modal trips. Th
   1. [MVP](#specs-work)
   2. [Further Exploration](#specs-work1)
   3. [Plan](#plan)
-  4. [Setup on OSX](#setup)
-  5. [Technologies Used](#Tech-used)
-  6. [Configuration/dependencies](#config-dep)
-  7. [MIT License](#mit-lic)
+  4. [Component Tree](#component)
+  5. [Wireframes](#wireframe)
+  6. [Setup on OSX](#setup)
+  7. [Technologies Used](#Tech-used)
+  8. [Configuration/dependencies](#config-dep)
+  9. [MIT License](#mit-lic)
 
 
 ## Minimum Viable Prototype (MVP) <a name="specs-work"></a>
@@ -29,6 +31,14 @@ A web application that helps people in Portland plan their multi-modal trips. Th
 * The user can create an account and save their routes
 * The user can rate their routes
 * Possible analysis on the routes, such charts showing their miles biked or carbon emmissions saved from taking transit and biking
+
+## Component Tree <a name="component"></a>
+
+![alt-text](https://github.com/paigewilliams/bike-transit-planner/blob/component-tree/src/assets/capstone-tree.jpg)
+
+## Wireframe <a name="wireframe"></a>
+
+![alt-text](https://github.com/paigewilliams/bike-transit-planner/blob/component-tree/src/assets/wireframe.png)
 
 ## Technology Used <a name="Tech-used"></a>
 

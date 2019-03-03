@@ -16,6 +16,12 @@ const TimeLine = styled.div`
   align-items: center;
 `;
 
+const StyledForm = styled.input`
+  border: none;
+  border-bottom: 1px solid tomato;
+  background: transparent;
+`
+
 function RouteForm(){
   let _startAddress = null;
   let _endAddress = null;
@@ -26,7 +32,7 @@ function RouteForm(){
     <FormStyles>
       <h3>Plan a route:</h3>
       <form>
-        <input
+        <StyledForm
           type='text'
           id='start'
           placeholder='Start Address'

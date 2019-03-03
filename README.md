@@ -54,6 +54,10 @@ A web application that helps people in Portland plan their multi-modal trips. Th
 ## Setup <a name="setup"></a>
 * Install Node.js
 * Clone this project with `git clone https://github.com/paigewilliams/bike-transit-planner`
+* Navigate to the root directory of the project with `cd bike-transit-planner`
+* Create a `.env` file in the root of the directory
+* Generate a Mapbox access token
+* Save your access token as `API_KEY` in the `.env` file
 * Run `npm install` to install dependencies
 * Run `npm run start` to build and serve the project
 * View the project in any browser at `http://localhost:8080/`

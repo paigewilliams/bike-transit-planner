@@ -3,18 +3,15 @@ import Map from './Map';
 import Header from './Header';
 import Sidebar from './Sidebar';
 import styled from 'styled-components';
-import { createGlobalStyle } from 'styled-components';
-
-const GlobalStyle = createGlobalStyle`
-  body {
-    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
-    font-family: 'Nunito', sans-serif;
-  };
-`;
+import GlobalStyle from '../theme/GlobalStyle';
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 7vw 43vw;
+  left: 0
+  right: 0;
+  top: 0;
+  bottom: 0;
+  grid-template-rows: 5vw 43vw;
   grid-template-columns: 25% 75%;
 
 `;

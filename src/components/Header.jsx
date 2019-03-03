@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import BikeSVG from './BikeSVG';
 
 const HeaderStyle = styled.header`
   grid-column: 1 / span 2;
@@ -17,6 +18,7 @@ function Header(){
   return(
     <HeaderStyle>
       <h1>Transit & Bike Trip Planner</h1>
+      <BikeSVG />
       <button>Sign In</button>
     </HeaderStyle>
   );

@@ -7,6 +7,7 @@ const SidebarStyles = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
+  margin-right: 0.5rem;
   background-color: white;
   overflow-y: scroll;
   postion: fixed;

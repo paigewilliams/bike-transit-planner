@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Nunito', sans-serif;
   };
 
-  h1 {
+  header {
     font-weight: 800;
   }
 

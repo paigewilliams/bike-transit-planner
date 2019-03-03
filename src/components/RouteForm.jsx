@@ -12,14 +12,33 @@ const FormStyles = styled.div`
 const TimeLine = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
+  justify-content: flex-start;
 `;
 
-const StyledForm = styled.input`
+const StyledInput = styled.input`
   border: none;
-  border-bottom: 1px solid tomato;
+  border-bottom: 3px solid tomato;
   background: transparent;
+  font-size: 18px;
+  margin-bottom: 2rem;
+  width: 15rem;
+`
+const StyledSelect = styled.select`
+  font-size: 16px;
+  margin-right: 1rem;
+`
+const StyledTime = styled(TimeField)`
+  border: none;
+  border-bottom: 3px solid tomato;
+  background: transparent;
+  font-size: 12px;
+  width: 100px;
+
+`
+const StyledText = styled.p`
+  font-size: 18px;
+  margin-right: 1rem;
 `
 
 function RouteForm(){
@@ -32,30 +51,31 @@ function RouteForm(){
     <FormStyles>
       <h3>Plan a route:</h3>
       <form>
-        <StyledForm
+        <StyledInput
           type='text'
           id='start'
           placeholder='Start Address'
           ref={(input)=> {_startAddress = input;}}/>
         <br/>
-        <input
+        <StyledInput
           type='text'
           id='end'
           placeholder='Destination Address'
           ref={(input)=> {_endAddress = input;}}/>
         <br/>
         <TimeLine>
-          <select ref={(option)=> {_departOrArrive = option;}}>
+          <StyledSelect ref={(option)=> {_departOrArrive = option;}}>
             <option value="depart">Depart</option>
             <option value ="arrive">Arrive</option>
-          </select>
-          <p>by</p>
-          <TimeField />
-          <input
+          </StyledSelect>
+          <StyledText>by</StyledText>
+          <StyledTime />
+        </TimeLine> 
+        <StyledText>on</StyledText>
+        <input
             type='date'
             id='date'
             ref={(input)=> {_date = input;}}/>
-        </TimeLine> 
         <br />
         <input 
           type='number'

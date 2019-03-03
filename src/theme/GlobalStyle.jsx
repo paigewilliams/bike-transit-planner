@@ -10,6 +10,16 @@ const GlobalStyle = createGlobalStyle`
     @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
     font-family: 'Nunito', sans-serif;
   }
+
+  input {
+    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
+    font-family: 'Nunito', sans-serif;
+  }
+
+  select {
+    @import url('https://fonts.googleapis.com/css?family=Nunito:400,800i');
+    font-family: 'Nunito', sans-serif;
+  }
 `;
 
 export default GlobalStyle;

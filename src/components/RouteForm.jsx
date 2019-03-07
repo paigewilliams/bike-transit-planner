@@ -6,7 +6,7 @@ import styled from 'styled-components';
 const FormStyles = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 20rem;
+  margin-bottom: 1rem;
 `;
 
 const TimeLine = styled.div`
@@ -26,7 +26,7 @@ const StyledInput = styled.input`
 `;
 const StyledSelect = styled.select`
   font-size: 16px;
-  
+
 `;
 const StyledTime = styled(TimeField)`
   border: none;
@@ -72,19 +72,19 @@ function RouteForm(){
           <StyledText>by</StyledText>
           <StyledTime />
           <StyledText>on</StyledText>
-        </TimeLine> 
+        </TimeLine>
         <TimeLine>
           <StyledInput
             type='date'
             id='date'
             ref={(input)=> {_date = input;}}/>
         </TimeLine>
-        <StyledInput 
+        <StyledInput
           type='number'
           id='miles'
           placeholder='Maximum miles biked'
-          ref={(input)=> {_miles = input;}}/> 
-        <br /> 
+          ref={(input)=> {_miles = input;}}/>
+        <br />
         <button type='submit'>Find Route</button>
 
       </form>

@@ -1,0 +1,1 @@
+export const ADD_SEARCH_PARAMS = 'ADD_SEARCH_PARAMS';

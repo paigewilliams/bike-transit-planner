@@ -43,11 +43,11 @@ const StyledText = styled.p`
 `;
 
 function RouteForm(){
-  let _startAddress = null;
-  let _endAddress = null;
+  let _toPlace = null;
+  let _fromPlace = null;
   let _departOrArrive = null;
   let _date = null;
-  let _miles = null;
+  let _distance = null;
   return(
     <FormStyles>
       <h3>Plan a route:</h3>
@@ -56,13 +56,13 @@ function RouteForm(){
           type='text'
           id='start'
           placeholder='Start address'
-          ref={(input)=> {_startAddress = input;}}/>
+          ref={(input)=> {_toPlace = input;}}/>
         <br/>
         <StyledInput
           type='text'
           id='end'
           placeholder='Destination address'
-          ref={(input)=> {_endAddress = input;}}/>
+          ref={(input)=> {_fromPlace = input;}}/>
         <br/>
         <TimeLine>
           <StyledSelect ref={(option)=> {_departOrArrive = option;}}>
@@ -83,7 +83,7 @@ function RouteForm(){
           type='number'
           id='miles'
           placeholder='Maximum miles biked'
-          ref={(input)=> {_miles = input;}}/>
+          ref={(input)=> {_distance = input;}}/>
         <br />
         <button type='submit'>Find Route</button>
 

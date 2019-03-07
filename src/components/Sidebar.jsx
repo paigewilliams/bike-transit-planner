@@ -14,13 +14,34 @@ const SidebarStyles = styled.div`
 `;
 
 
-function Sidebar(){
-  return(
-    <SidebarStyles>
-      <RouteForm />
-      <ResultList />
-    </SidebarStyles>
-  );
+class Sidebar extends React.Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      resultsVisible: false
+    };
+    this.handleHideForm = this.handleHideForm.bind(this);
+  }
+
+  handleHideForm(){
+    this.setState({resultsVisible: true});
+  }
+
+  render() {
+    let visibleContent = null;
+    if(this.state.resultsVisible){
+      visibleContent = <ResultList />;
+    } else {
+      visibleContent = <RouteForm onFormSubmission={this.handleHideForm}/>;
+    }
+    return(
+      <SidebarStyles>
+        {visibleContent}
+      </SidebarStyles>
+    );
+  }
+
 }
 
 export default Sidebar;

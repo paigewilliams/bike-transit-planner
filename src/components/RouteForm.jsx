@@ -3,7 +3,7 @@ import TimeField from 'react-simple-timefield';
 import { Formkik, Form, Field, ErrorMessage } from 'formik';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { addSearchParams } from './../actions';
+import { addSearchParams, fetchRoute } from './../actions';
 
 const FormStyles = styled.div`
   display: flex;
@@ -64,6 +64,7 @@ function RouteForm({ dispatch }){
             _date.value,
             _distance.value
           ))
+          fetchRoute();
         _toPlace = '';
         _fromPlace = '';
         _date = '';

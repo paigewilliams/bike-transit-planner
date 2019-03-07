@@ -20,6 +20,7 @@ export function fetchRoute() {
     .then(str => {
       dataAsJson = JSON.parse(convert.xml2json(str));
     }).then(() => {
-      console.log(dataAsJson)
+      let parsedData = dataAsJson.elements[0].elements[1].elements[3]
+      console.log(parsedData)
     })
 }

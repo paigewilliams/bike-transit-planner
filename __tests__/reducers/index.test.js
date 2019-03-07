@@ -32,8 +32,6 @@ describe('rootReducer', () => {
 
 describe('searchParamsReducer', () => {
 
-
-
   test('should return default state if no action type is recognized', () => {
     expect(searchParamsReducer({}, { type: null })).toEqual({});
   });

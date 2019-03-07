@@ -2,6 +2,8 @@ import React from 'react';
 import TimeField from 'react-simple-timefield';
 import { Formkik, Form, Field, ErrorMessage } from 'formik';
 import styled from 'styled-components';
+import { connect } from 'react-redux';
+import { addSearchParams } from './../actions';
 
 const FormStyles = styled.div`
   display: flex;
@@ -42,16 +44,31 @@ const StyledText = styled.p`
   margin-left 1rem;
 `;
 
-function RouteForm(){
+function RouteForm({ dispatch }){
+
   let _toPlace = null;
   let _fromPlace = null;
   let _departOrArrive = null;
   let _date = null;
   let _distance = null;
+
   return(
     <FormStyles>
       <h3>Plan a route:</h3>
-      <form>
+      <form onSubmit={e => {
+          e.preventDefault();
+          dispatch(addSearchParams(
+            _toPlace.value,
+            _fromPlace.value,
+            _departOrArrive.value,
+            _date.value,
+            _distance.value
+          ))
+        _toPlace = '';
+        _fromPlace = '';
+        _date = '';
+        _distance = '';
+        }}>
         <StyledInput
           type='text'
           id='start'
@@ -86,10 +103,9 @@ function RouteForm(){
           ref={(input)=> {_distance = input;}}/>
         <br />
         <button type='submit'>Find Route</button>
-
       </form>
     </FormStyles>
   );
 }
 
-export default RouteForm;
+export default connect()(RouteForm);

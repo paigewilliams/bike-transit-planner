@@ -16,10 +16,10 @@ const HeaderStyle = styled.header`
 
 const HeaderText = styled.h1`
   margin-left: 1rem;
-`
+`;
 const HeaderButton = styled.button`
   margin-right: 1rem;
-`
+`;
 
 function Header(){
   return(

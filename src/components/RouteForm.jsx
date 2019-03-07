@@ -56,20 +56,20 @@ function RouteForm({ dispatch }){
     <FormStyles>
       <h3>Plan a route:</h3>
       <form onSubmit={e => {
-          e.preventDefault();
-          dispatch(addSearchParams(
-            _toPlace.value,
-            _fromPlace.value,
-            _departOrArrive.value,
-            _date.value,
-            _distance.value
-          ))
-          fetchRoute();
+        e.preventDefault();
+        dispatch(addSearchParams(
+          _toPlace.value,
+          _fromPlace.value,
+          _departOrArrive.value,
+          _date.value,
+          _distance.value
+        ));
+        fetchRoute();
         _toPlace = '';
         _fromPlace = '';
         _date = '';
         _distance = '';
-        }}>
+      }}>
         <StyledInput
           type='text'
           id='start'

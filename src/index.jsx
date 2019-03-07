@@ -9,7 +9,7 @@ const store = createStore(rootReducer);
 
 let unsubscribe = store.subscribe(() => {
   console.log(store.getState());
-})
+});
 
 
 const render = (Component) => {

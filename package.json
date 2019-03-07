@@ -25,7 +25,8 @@
     "react-simple-timefield": "^2.0.1",
     "redux": "^3.7.2",
     "styled-components": "^4.1.3",
-    "uuid": "^3.2.1"
+    "uuid": "^3.2.1",
+    "xml-js": "^1.6.11"
   },
   "devDependencies": {
     "babel-core": "^6.24.1",

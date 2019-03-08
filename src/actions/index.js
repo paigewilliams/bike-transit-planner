@@ -12,25 +12,33 @@ export const addSearchParams = (toPlace, fromPlace, departOrArrive, date, distan
   id: v4()
 });
 
+export function concatCoords(coords){
+  console.log(coords);
+}
+
 export function fetchCoords(address) {
   fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key='+process.env.GOOGLE_MAPS_API).then((response) => response.json(),
   error => console.log('an error occured', error))
   .then((json) => {
   const formattedCoords = json.results[0].geometry.location;
-  return formattedCoords;
+  concatCoords(formattedCoords);
   })
 }
 
+export function formatAddress(address, regex){
+  return address.replace(/\s/g, regex)
+}
+
 export function processUserInputForAPICall(toPlace, fromPlace, departOrArrive, date, distance) {
-  const distanceAsMeters = Math.round(parseInt(distance) * 1609)
-  const formattedToPlaceForCoords = toPlace.replace(/\s/g, '+');
-  const formattedFromPlaceForCoords = fromPlace.replace(/\s/g, '+');
-  const toPlaceCoords = fetchCoords(formattedToPlaceForCoords);
-  const fromPlaceCoords = fetchCoords(formattedFromPlaceForCoords);
-  const formattedToPlaceForTrimet = toPlace.replace(/\s/g, '%');
-  const formattedFromPlaceForTrimet = fromPlace.replace(/\s/g, '%');
-  console.log(formattedToPlaceForTrimet);
-  console.log(formattedFromPlaceForTrimet);
+  const distanceAsMeters = Math.round(parseInt(distance) * 1609);
+  const formattedToPlaceForCoords = formatAddress(toPlace, '+');
+  const formattedFromPlaceForCoords = formatAddress(fromPlace, '+');
+  const formattedToPlaceForTrimet = formatAddress(toPlace, '%');
+  const formattedFromPlaceForTrimet = formatAddress(fromPlace, '%');
+  console.log(formattedToPlaceForCoords);
+  fetchCoords(formattedToPlaceForCoords);
+  fetchCoords(formattedFromPlaceForCoords);
+
 }
 // export function fetchRoute(toPlace, fromPlace, departOrArrive, date, distance) {
 //

@@ -66,7 +66,7 @@ function RouteForm({ dispatch, onFormSubmission }){
           _distance.value
         ));
         onFormSubmission();
-        // fetchRoute();
+        fetchRoute();
         _toPlace = '';
         _fromPlace = '';
         _date = '';

@@ -17,11 +17,11 @@ export function concatCoords(coords){
 }
 
 export function fetchCoords(address) {
-  fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key='+process.env.GOOGLE_MAPS_API).then((response) => response.json(),
+  return fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key='+process.env.GOOGLE_MAPS_API).then((response) => response.json(),
   error => console.log('an error occured', error))
   .then((json) => {
   const formattedCoords = json.results[0].geometry.location;
-  concatCoords(formattedCoords);
+  return formattedCoords
   })
 }
 
@@ -35,10 +35,10 @@ export function processUserInputForAPICall(toPlace, fromPlace, departOrArrive, d
   const formattedFromPlaceForCoords = formatAddress(fromPlace, '+');
   const formattedToPlaceForTrimet = formatAddress(toPlace, '%');
   const formattedFromPlaceForTrimet = formatAddress(fromPlace, '%');
-  console.log(formattedToPlaceForCoords);
-  fetchCoords(formattedToPlaceForCoords);
-  fetchCoords(formattedFromPlaceForCoords);
-
+  let polishedToCoords = fetchCoords(formattedToPlaceForCoords);
+  let polishedFromCoords = fetchCoords(formattedFromPlaceForCoords);
+  concatCoords(polishedToCoords);
+  concatCoords(polishedFromCoords);
 }
 // export function fetchRoute(toPlace, fromPlace, departOrArrive, date, distance) {
 //

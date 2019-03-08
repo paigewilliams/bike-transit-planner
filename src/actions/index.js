@@ -14,7 +14,7 @@ export const addSearchParams = (toPlace, fromPlace, departOrArrive, date, distan
 
 export function fetchRoute() {
   let dataAsJson = {};
-  return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1551978478825&from=&to=&arriveBy=false&time=9%3A06am&ui_date=3%2F8%2F2019&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance=8047&date=2019-03-07&toPlace=208%20E%20HISTORIC%20COLUMBIA%20RIVER%20HWY%3A%3A45.540734%2C-122.387231&fromPlace=2023%20NE%2012TH%20AVE%3A%3A45.537078%2C-122.65352').then(
+  return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy=false&time=10%3A52am&ui_date=3%2F8%2F2019&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance=8047&date=2019-03-08&toPlace=1208%20E%20HISTORIC%20COLUMBIA%20RIVER%20HWY%3A%3A45.538528%2C-122.376423&fromPlace=2023%20NE%2012TH%20AVE%3A%3A45.537078%2C-122.65352').then(
     response => response.text(),
     error => console.log('an error occured', error))
     .then(str => {

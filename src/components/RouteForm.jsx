@@ -65,8 +65,12 @@ function RouteForm({ dispatch, onFormSubmission }){
           _date.value,
           _distance.value
         ));
+        fetchRoute(_toPlace.value,
+        _fromPlace.value,
+        _departOrArrive.value,
+        _date.value,
+        _distance.value);
         onFormSubmission();
-        fetchRoute();
         _toPlace = '';
         _fromPlace = '';
         _date = '';
@@ -86,8 +90,8 @@ function RouteForm({ dispatch, onFormSubmission }){
         <br/>
         <TimeLine>
           <StyledSelect ref={(option)=> {_departOrArrive = option;}}>
-            <option value="depart">Depart</option>
-            <option value ="arrive">Arrive</option>
+            <option value="false">Depart</option>
+            <option value ="true">Arrive</option>
           </StyledSelect>
           <StyledText>by</StyledText>
           <StyledTime />

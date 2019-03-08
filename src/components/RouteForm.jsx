@@ -52,6 +52,7 @@ function RouteForm({ dispatch, onFormSubmission }){
   let _departOrArrive = null;
   let _date = null;
   let _distance = null;
+  let _time = null;
 
   return(
     <FormStyles>
@@ -94,7 +95,8 @@ function RouteForm({ dispatch, onFormSubmission }){
             <option value ="true">Arrive</option>
           </StyledSelect>
           <StyledText>by</StyledText>
-          <StyledTime />
+          <StyledTime
+            ref={(input)=> {_time = input;}}/>
           <StyledText>on</StyledText>
         </TimeLine>
         <TimeLine>

@@ -66,10 +66,10 @@ function RouteForm({ dispatch, onFormSubmission }){
           _distance.value
         ));
         fetchRoute(_toPlace.value,
-        _fromPlace.value,
-        _departOrArrive.value,
-        _date.value,
-        _distance.value);
+          _fromPlace.value,
+          _departOrArrive.value,
+          _date.value,
+          _distance.value);
         onFormSubmission();
         _toPlace = '';
         _fromPlace = '';
@@ -118,6 +118,6 @@ function RouteForm({ dispatch, onFormSubmission }){
 RouteForm.propTypes = {
   dispatch: PropTypes.func,
   onFormSubmission: PropTypes.func
-}
+};
 
 export default connect()(RouteForm);

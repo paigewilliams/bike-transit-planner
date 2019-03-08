@@ -4,7 +4,7 @@ import { Formkik, Form, Field, ErrorMessage } from 'formik';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { addSearchParams, fetchRoute } from './../actions';
+import { addSearchParams, processUserInputForAPICall } from './../actions';
 
 const FormStyles = styled.div`
   display: flex;
@@ -65,7 +65,7 @@ function RouteForm({ dispatch, onFormSubmission }){
           _date.value,
           _distance.value
         ));
-        fetchRoute(_toPlace.value,
+        processUserInputForAPICall(_toPlace.value,
           _fromPlace.value,
           _departOrArrive.value,
           _date.value,

@@ -5,7 +5,7 @@
 
 
 ## Description
-A web application that helps people in Portland plan their multi-modal trips. The user is able to enter their start and end point, and how many miles they would like to bike. After entering their search, the user can see routes on a map that fit thier criteria. In future iterations I would like to add user authentication and have the user be able to save their search results. I would also like to add metrics on how many miles they biked and the carbon footprint of their route. 
+A web application that helps people in Portland plan their multi-modal trips. The user is able to enter their start and end point, and how many miles they would like to bike. After entering their search, the user can see routes on a map that fit thier criteria. In future iterations I would like to add user authentication and have the user be able to save their search results. I would also like to add metrics on how many miles they biked and the carbon footprint of their route.
 
 ## Table of Contents
   1. [MVP](#specs-work)
@@ -29,6 +29,7 @@ A web application that helps people in Portland plan their multi-modal trips. Th
 ## Further Exploration <a name="specs-work1"></a>
 
 * The user can create an account and save their routes
+* Include real time stop information so the user can see when the bus is arriving at the stops on their route
 * The user can rate their routes
 * Possible analysis on the routes, such charts showing their miles biked or carbon emmissions saved from taking transit and biking
 
@@ -51,7 +52,7 @@ View the plan [here.](https://github.com/paigewilliams/capstone-planning)
 * Styled Components
 * Jest
 * [Trimet Trip Planner API](https://developer.trimet.org/ws_docs/tripplanner_ws.shtml)
-* [Mapbox](https://www.mapbox.com/) 
+* [Mapbox](https://www.mapbox.com/)
 * Icons from [Good Ware](https://www.flaticon.com/packs/transportation-46)
 * Icons made by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](https://www.flaticon.com/) is licensed by [CC 3.0 BY](http://creativecommons.org/licenses/by/3.0/)
 

@@ -21,12 +21,10 @@ export function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, to
     .then((response) => response.json(),
     error => console.log('an error occured', error))
     .then((json) => {
-      return cleanCoords = json.results[0].geometry.location;
+      console.log(json)
+      // return json.results[0].geometry.location;
     });
-  }).then(
-    console.log(cleanCoords)
-  )
-
+  });
   fetchRoute({ distance, outputCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date })
 }
 
@@ -38,8 +36,8 @@ export function processUserInputForAPICall({toPlace, fromPlace, departOrArrive, 
   const distanceAsMeters = Math.round(parseInt(distance) * 1609);
   const formattedToPlaceForCoords = formatAddress(toPlace, '+');
   const formattedFromPlaceForCoords = formatAddress(fromPlace, '+');
-  const formattedToPlaceForTrimet = formatAddress(toPlace, '%');
-  const formattedFromPlaceForTrimet = formatAddress(fromPlace, '%');
+  const formattedToPlaceForTrimet = formatAddress(toPlace, '20%');
+  const formattedFromPlaceForTrimet = formatAddress(fromPlace, '20%');
   const formattedTime = militaryToStandardTime(time);
   const data = {
     distance: distanceAsMeters,
@@ -59,8 +57,9 @@ function militaryToStandardTime(time){
   return (time[0].charAt(0) == 1 && time[0].charAt(1) > 2) ? (time[0] - 12) + '%3A' + time[1] + 'pm' : time.join('%3A') + 'am'
 }
 export function fetchRoute(data) {
-  // const { departOrArrive, distance, fromPlaceForTrimet, outputCoords, time, toPlaceForTrimet, date } = data;
-  // console.log(outputCoords[0], outputCoords[1]);
+  
+  const { departOrArrive, distance, fromPlaceForTrimet, outputCoords, time, toPlaceForTrimet, date } = data;
+  console.log(toPlaceForTrimet);
   // return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace=1208%20E%20HISTORIC%20COLUMBIA%20RIVER%20HWY%3A%3A45.538528%2C-122.376423&fromPlace='+toPlaceForTrimet+'%3A%3A45.537078%2C-122.65352').then(
   //   response => response.json(),
   //   error => console.log('an error occured', error))

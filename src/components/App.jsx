@@ -7,7 +7,7 @@ import GlobalStyle from '../theme/GlobalStyle';
 
 const Container = styled.div`
   display: grid;
-  grid-template-rows: 5vw 100vw;
+  grid-template-rows: 5vw 50vw;
   grid-template-columns: 25% 75%;
 
 `;

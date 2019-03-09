@@ -30,16 +30,17 @@ export function formatAddress(address, regex){
   return address.replace(/\s/g, regex);
 }
 
-export function processUserInputForAPICall(toPlace, fromPlace, departOrArrive, date, distance) {
+export function processUserInputForAPICall({toPlace, fromPlace, departOrArrive, date, distance, time}) {
   const distanceAsMeters = Math.round(parseInt(distance) * 1609);
   const formattedToPlaceForCoords = formatAddress(toPlace, '+');
   const formattedFromPlaceForCoords = formatAddress(fromPlace, '+');
   const formattedToPlaceForTrimet = formatAddress(toPlace, '%');
   const formattedFromPlaceForTrimet = formatAddress(fromPlace, '%');
-  let polishedToCoords = fetchCoords(formattedToPlaceForCoords);
-  let polishedFromCoords = fetchCoords(formattedFromPlaceForCoords);
-  concatCoords(polishedToCoords);
-  concatCoords(polishedFromCoords);
+  console.log(time);
+}
+
+export function militaryToStandardTime(time){
+  
 }
 // export function fetchRoute(toPlace, fromPlace, departOrArrive, date, distance) {
 //

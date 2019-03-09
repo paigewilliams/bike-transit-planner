@@ -17,16 +17,16 @@ export function concatCoords(coords){
   console.log(coords);
 }
 
-export function fetchCoords(address) {
-  fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key='+process.env.GOOGLE_MAPS_API).then((response) => response.json(),
+export function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time }) {
+  fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+toPlaceForCoords+'&key='+process.env.GOOGLE_MAPS_API).then((response) => response.json(),
     error => console.log('an error occured', error))
     .then((json) => {
       const formattedCoords = json.results[0].geometry.location;
-      return formattedCoords;
+      console.log(formattedCoords);
     });
 }
 
-export function formatAddress(address, regex){
+function formatAddress(address, regex){
   return address.replace(/\s/g, regex);
 }
 
@@ -37,12 +37,21 @@ export function processUserInputForAPICall({toPlace, fromPlace, departOrArrive, 
   const formattedToPlaceForTrimet = formatAddress(toPlace, '%');
   const formattedFromPlaceForTrimet = formatAddress(fromPlace, '%');
   const formattedTime = militaryToStandardTime(time);
-  console.log(formattedTime);
+  const data = {
+    distance: distanceAsMeters,
+    toPlaceForCoords: formattedToPlaceForCoords,
+    fromPlaceForCoords: formattedFromPlaceForCoords,
+    toPlaceForTrimet: formattedToPlaceForTrimet,
+    fromPlaceForTrimet: formattedFromPlaceForTrimet,
+    departOrArrive: departOrArrive,
+    time: formattedTime
+  }
+  fetchCoords(data);
 }
 
-export function militaryToStandardTime(time){
+function militaryToStandardTime(time){
   time = time.split(':');
-  return (time[0].charAt(0) == 1 && time[0].charAt(1) > 2) ? (time[0] - 12) + ':' + time[1] + 'pm' : time.join(':') + 'am'
+  return (time[0].charAt(0) == 1 && time[0].charAt(1) > 2) ? (time[0] - 12) + '%3A' + time[1] + 'pm' : time.join('%3A') + 'am'
 }
 // export function fetchRoute(toPlace, fromPlace, departOrArrive, date, distance) {
 //

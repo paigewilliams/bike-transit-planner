@@ -65,7 +65,7 @@ function RouteForm({ dispatch, onFormSubmission}) {
           date: _date.value,
           distance:  _distance.value,
           time: _time.value
-        }
+        };
         dispatch(addSearchParams(input));
         processUserInputForAPICall(input);
         onFormSubmission();

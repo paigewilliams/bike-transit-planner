@@ -1,6 +1,5 @@
 import * as types from './../constants/ActionTypes';
 import v4 from 'uuid/v4';
-import convert from 'xml-js';
 
 export const addSearchParams = ({toPlace, fromPlace, departOrArrive, date, distance, time}) => ({
   type: types.ADD_SEARCH_PARAMS,
@@ -13,19 +12,19 @@ export const addSearchParams = ({toPlace, fromPlace, departOrArrive, date, dista
   id: v4()
 });
 
- function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }) {
+function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }) {
   const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
   let cleanCoords = [];
   placesForCoords.forEach(function(place){
     fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+place+'&key='+process.env.GOOGLE_KEY)
-    .then((response) => response.json(),
-    error => console.log('an error occured', error))
-    .then((json) => {
-       cleanCoords.push(json.results[0].geometry.location);
-       if (cleanCoords.length === 2){
-        fetchRoute({ distance, cleanCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date })
+      .then((response) => response.json(),
+        error => console.log('an error occured', error))
+      .then((json) => {
+        cleanCoords.push(json.results[0].geometry.location);
+        if (cleanCoords.length === 2){
+          fetchRoute({ distance, cleanCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date });
         }
-    });
+      });
   });
 }
 
@@ -49,28 +48,21 @@ export function processUserInputForAPICall({toPlace, fromPlace, departOrArrive, 
     departOrArrive: departOrArrive,
     time: formattedTime,
     date: date
-  }
+  };
   fetchCoords(data);
 }
 
 function militaryToStandardTime(time){
   time = time.split(':');
-  return (time[0].charAt(0) == 1 && time[0].charAt(1) > 2) ? (time[0] - 12) + '%3A' + time[1] + 'pm' : time.join('%3A') + 'am'
+  return (time[0].charAt(0) == 1 && time[0].charAt(1) > 2) ? (time[0] - 12) + '%3A' + time[1] + 'pm' : time.join('%3A') + 'am';
 }
+
 export function fetchRoute(data) {
-  
   const { departOrArrive, distance, fromPlaceForTrimet, cleanCoords, time, toPlaceForTrimet, date } = data;
   return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace='+fromPlaceForTrimet+'%3A%3A'+cleanCoords[1].lat+'%2C'+cleanCoords[1].lng+'&fromPlace='+toPlaceForTrimet+'%3A%3A'+cleanCoords[0].lat+'%2C'+cleanCoords[0].lng+'').then(
     response => response.json(),
     error => console.log('an error occured', error))
     .then(json => {
       console.log(json);
-      // dataAsJson = JSON.parse(convert.xml2json(str));
-      // console.log(dataAsJson);
-    })
-  // .then(() => {
-  //   let parsedData = dataAsJson.elements[0].elements[1].elements[3]
-  //   console.log(parsedData)
-  // })
-
+    });
 }

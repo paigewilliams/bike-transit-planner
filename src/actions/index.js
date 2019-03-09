@@ -13,7 +13,7 @@ export const addSearchParams = ({toPlace, fromPlace, departOrArrive, date, dista
   id: v4()
 });
 
-export function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }) {
+ function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }) {
   const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
   let cleanCoords = [];
   placesForCoords.forEach(function(place){
@@ -22,12 +22,11 @@ export function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, to
     error => console.log('an error occured', error))
     .then((json) => {
        cleanCoords.push(json.results[0].geometry.location);
-       console.log(cleanCoords);
+       if (cleanCoords.length === 2){
+        fetchRoute({ distance, cleanCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date })
+        }
     });
-  })
-  if (cleanCoords.length > 0){
-    fetchRoute({ distance, cleanCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date })
-  }
+  });
 }
 
 function formatAddress(address, regex){
@@ -61,15 +60,14 @@ function militaryToStandardTime(time){
 export function fetchRoute(data) {
   
   const { departOrArrive, distance, fromPlaceForTrimet, cleanCoords, time, toPlaceForTrimet, date } = data;
-  console.log(cleanCoords);
-  // return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace='+fromPlaceForTrimet+'%3A%3A45.538528%2C-122.376423&fromPlace='+toPlaceForTrimet+'%3A%3A45.537078%2C-122.65352').then(
-  //   response => response.json(),
-  //   error => console.log('an error occured', error))
-  //   .then(json => {
-  //     console.log(json);
-  //     // dataAsJson = JSON.parse(convert.xml2json(str));
-  //     // console.log(dataAsJson);
-  //   })
+  return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace='+fromPlaceForTrimet+'%3A%3A'+cleanCoords[1].lat+'%2C'+cleanCoords[1].lng+'&fromPlace='+toPlaceForTrimet+'%3A%3A'+cleanCoords[0].lat+'%2C'+cleanCoords[0].lng+'').then(
+    response => response.json(),
+    error => console.log('an error occured', error))
+    .then(json => {
+      console.log(json);
+      // dataAsJson = JSON.parse(convert.xml2json(str));
+      // console.log(dataAsJson);
+    })
   // .then(() => {
   //   let parsedData = dataAsJson.elements[0].elements[1].elements[3]
   //   console.log(parsedData)

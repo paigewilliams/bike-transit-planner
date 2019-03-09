@@ -36,11 +36,13 @@ export function processUserInputForAPICall({toPlace, fromPlace, departOrArrive, 
   const formattedFromPlaceForCoords = formatAddress(fromPlace, '+');
   const formattedToPlaceForTrimet = formatAddress(toPlace, '%');
   const formattedFromPlaceForTrimet = formatAddress(fromPlace, '%');
-  console.log(time);
+  const formattedTime = militaryToStandardTime(time);
+  console.log(formattedTime);
 }
 
 export function militaryToStandardTime(time){
-  
+  time = time.split(':');
+  return (time[0].charAt(0) == 1 && time[0].charAt(1) > 2) ? (time[0] - 12) + ':' + time[1] + 'pm' : time.join(':') + 'am'
 }
 // export function fetchRoute(toPlace, fromPlace, departOrArrive, date, distance) {
 //

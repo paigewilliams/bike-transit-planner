@@ -18,12 +18,16 @@ export function concatCoords(coords){
 }
 
 export function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time }) {
-  fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+toPlaceForCoords+'&key='+process.env.GOOGLE_MAPS_API).then((response) => response.json(),
+  const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
+  let outputCoords = placesForCoords.map(coords => {
+    return fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+coords+'&key='+process.env.GOOGLE_MAPS_API)
+    .then((response) => response.json(),
     error => console.log('an error occured', error))
     .then((json) => {
-      const formattedCoords = json.results[0].geometry.location;
-      console.log(formattedCoords);
+      return json.results[0].geometry.location;
     });
+  });
+  console.log(outputCoords);
 }
 
 function formatAddress(address, regex){

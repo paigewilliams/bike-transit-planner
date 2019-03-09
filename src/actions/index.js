@@ -15,14 +15,12 @@ export const addSearchParams = ({toPlace, fromPlace, departOrArrive, date, dista
 
 export function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }) {
   const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
-  let cleanCoords;
   let outputCoords = placesForCoords.map(coords => {
-     fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+coords+'&key='+process.env.GOOGLE_MAPS_API)
+     fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+coords+'&key='+process.env.GOOGLE_KEY)
     .then((response) => response.json(),
     error => console.log('an error occured', error))
     .then((json) => {
-      console.log(json)
-      // return json.results[0].geometry.location;
+      return json.results[0].geometry.location;
     });
   });
   fetchRoute({ distance, outputCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date })
@@ -36,8 +34,8 @@ export function processUserInputForAPICall({toPlace, fromPlace, departOrArrive, 
   const distanceAsMeters = Math.round(parseInt(distance) * 1609);
   const formattedToPlaceForCoords = formatAddress(toPlace, '+');
   const formattedFromPlaceForCoords = formatAddress(fromPlace, '+');
-  const formattedToPlaceForTrimet = formatAddress(toPlace, '20%');
-  const formattedFromPlaceForTrimet = formatAddress(fromPlace, '20%');
+  const formattedToPlaceForTrimet = formatAddress(toPlace, '%20');
+  const formattedFromPlaceForTrimet = formatAddress(fromPlace, '%20');
   const formattedTime = militaryToStandardTime(time);
   const data = {
     distance: distanceAsMeters,
@@ -60,14 +58,14 @@ export function fetchRoute(data) {
   
   const { departOrArrive, distance, fromPlaceForTrimet, outputCoords, time, toPlaceForTrimet, date } = data;
   console.log(toPlaceForTrimet);
-  // return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace=1208%20E%20HISTORIC%20COLUMBIA%20RIVER%20HWY%3A%3A45.538528%2C-122.376423&fromPlace='+toPlaceForTrimet+'%3A%3A45.537078%2C-122.65352').then(
-  //   response => response.json(),
-  //   error => console.log('an error occured', error))
-  //   .then(json => {
-  //     console.log(json);
-  //     // dataAsJson = JSON.parse(convert.xml2json(str));
-  //     // console.log(dataAsJson);
-  //   })
+  return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace='+fromPlaceForTrimet+'%3A%3A45.538528%2C-122.376423&fromPlace='+toPlaceForTrimet+'%3A%3A45.537078%2C-122.65352').then(
+    response => response.json(),
+    error => console.log('an error occured', error))
+    .then(json => {
+      console.log(json);
+      // dataAsJson = JSON.parse(convert.xml2json(str));
+      // console.log(dataAsJson);
+    })
   // .then(() => {
   //   let parsedData = dataAsJson.elements[0].elements[1].elements[3]
   //   console.log(parsedData)

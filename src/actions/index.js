@@ -15,14 +15,18 @@ export const addSearchParams = ({toPlace, fromPlace, departOrArrive, date, dista
 
 export function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }) {
   const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
+  let cleanCoords;
   let outputCoords = placesForCoords.map(coords => {
-    return fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+coords+'&key='+process.env.GOOGLE_MAPS_API)
+     fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+coords+'&key='+process.env.GOOGLE_MAPS_API)
     .then((response) => response.json(),
     error => console.log('an error occured', error))
     .then((json) => {
-      return json.results[0].geometry.location;
+      return cleanCoords = json.results[0].geometry.location;
     });
-  });
+  }).then(
+    console.log(cleanCoords)
+  )
+
   fetchRoute({ distance, outputCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date })
 }
 
@@ -55,16 +59,16 @@ function militaryToStandardTime(time){
   return (time[0].charAt(0) == 1 && time[0].charAt(1) > 2) ? (time[0] - 12) + '%3A' + time[1] + 'pm' : time.join('%3A') + 'am'
 }
 export function fetchRoute(data) {
-  const { departOrArrive, distance, fromPlaceForTrimet, outputCoords, time, toPlaceForTrimet, date } = data;
-  console.log(toPlaceForTrimet, fromPlaceForTrimet);
-  return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace=1208%20E%20HISTORIC%20COLUMBIA%20RIVER%20HWY%3A%3A45.538528%2C-122.376423&fromPlace='+toPlaceForTrimet+'%3A%3A45.537078%2C-122.65352').then(
-    response => response.json(),
-    error => console.log('an error occured', error))
-    .then(json => {
-      console.log(json);
-      // dataAsJson = JSON.parse(convert.xml2json(str));
-      // console.log(dataAsJson);
-    })
+  // const { departOrArrive, distance, fromPlaceForTrimet, outputCoords, time, toPlaceForTrimet, date } = data;
+  // console.log(outputCoords[0], outputCoords[1]);
+  // return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace=1208%20E%20HISTORIC%20COLUMBIA%20RIVER%20HWY%3A%3A45.538528%2C-122.376423&fromPlace='+toPlaceForTrimet+'%3A%3A45.537078%2C-122.65352').then(
+  //   response => response.json(),
+  //   error => console.log('an error occured', error))
+  //   .then(json => {
+  //     console.log(json);
+  //     // dataAsJson = JSON.parse(convert.xml2json(str));
+  //     // console.log(dataAsJson);
+  //   })
   // .then(() => {
   //   let parsedData = dataAsJson.elements[0].elements[1].elements[3]
   //   console.log(parsedData)

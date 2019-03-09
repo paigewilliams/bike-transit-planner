@@ -2,13 +2,14 @@ import * as types from './../constants/ActionTypes';
 import v4 from 'uuid/v4';
 import convert from 'xml-js';
 
-export const addSearchParams = (toPlace, fromPlace, departOrArrive, date, distance) => ({
+export const addSearchParams = ({toPlace, fromPlace, departOrArrive, date, distance, time}) => ({
   type: types.ADD_SEARCH_PARAMS,
   toPlace: toPlace,
   fromPlace: fromPlace,
   departOrArrive: departOrArrive,
   date: date,
   distance: distance,
+  time: time,
   id: v4()
 });
 
@@ -17,7 +18,7 @@ export function concatCoords(coords){
 }
 
 export function fetchCoords(address) {
- fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key='+process.env.GOOGLE_MAPS_API).then((response) => response.json(),
+  fetch('https://maps.googleapis.com/maps/api/geocode/json?address='+address+'&key='+process.env.GOOGLE_MAPS_API).then((response) => response.json(),
     error => console.log('an error occured', error))
     .then((json) => {
       const formattedCoords = json.results[0].geometry.location;

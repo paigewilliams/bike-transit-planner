@@ -3,7 +3,7 @@ const { types } = constants;
 
 export default (state = {}, action)=> {
   let newState;
-  const { toPlace, fromPlace, departOrArrive, date, distance, id } = action;
+  const { toPlace, fromPlace, departOrArrive, date, distance, id, time } = action;
 
   switch (action.type) {
   case types.ADD_SEARCH_PARAMS:
@@ -14,6 +14,7 @@ export default (state = {}, action)=> {
         departOrArrive: departOrArrive,
         date: date,
         distance: distance,
+        time: time,
         id: id
       }
     });

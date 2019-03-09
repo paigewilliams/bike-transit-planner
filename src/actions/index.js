@@ -27,7 +27,7 @@ export function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, to
 }
 
 function formatAddress(address, regex){
-  return address.replace(/\s/g, regex);
+  return address.toUpperCase().replace(/\s/g, regex);
 }
 
 export function processUserInputForAPICall({toPlace, fromPlace, departOrArrive, date, distance, time}) {
@@ -56,7 +56,8 @@ function militaryToStandardTime(time){
 }
 export function fetchRoute(data) {
   const { departOrArrive, distance, fromPlaceForTrimet, outputCoords, time, toPlaceForTrimet, date } = data;
-  return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy=false&time='+time+'&ui_date=3%2F8%2F2019&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace=1208%20E%20HISTORIC%20COLUMBIA%20RIVER%20HWY%3A%3A45.538528%2C-122.376423&fromPlace=2023%20NE%2012TH%20AVE%3A%3A45.537078%2C-122.65352').then(
+  console.log(toPlaceForTrimet, fromPlaceForTrimet);
+  return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace=1208%20E%20HISTORIC%20COLUMBIA%20RIVER%20HWY%3A%3A45.538528%2C-122.376423&fromPlace='+toPlaceForTrimet+'%3A%3A45.537078%2C-122.65352').then(
     response => response.json(),
     error => console.log('an error occured', error))
     .then(json => {

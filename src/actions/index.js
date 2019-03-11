@@ -12,6 +12,12 @@ export const addSearchParams = ({toPlace, fromPlace, departOrArrive, date, dista
   id: v4()
 });
 
+export const addItineraryById = ({ legs }) => ({
+  type: types.ADD_ITINERARY,
+  legs: legs,
+  id: v4()
+});
+
 function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }) {
   const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
   let cleanCoords = [];
@@ -63,6 +69,33 @@ export function fetchRoute(data) {
     response => response.json(),
     error => console.log('an error occured', error))
     .then(json => {
-      console.log(json.plan.itineraries[0]);
+      const itinerary = json.plan.itineraries[0].legs;
+      const legs = itinerary.map(function(leg){
+        let newId = v4();
+        let legRouteLongName;
+        let legRouteShortName;
+        if (leg.routeShortName !== undefined && leg.routeLongName !== undefined){
+          legRouteShortName = leg.routeShortName;
+          legRouteLongName = leg.routeLongName;
+        } else {
+          legRouteShortName = null;
+          legRouteLongName = null;
+        }
+        const legObj = Object.assign({}, {}, {
+          [newId] : {
+            legMode: leg.mode,
+            legToName: leg.to.name,
+            legFromName: leg.from.name,
+            legToStopId: leg.to.stopId,
+            legDistance: leg.distance,
+            legStartTime: leg.startTime,
+            legGeometry: leg.legGeometry.points,
+            legRouteShortName: legRouteShortName,
+            legRouteLongName: legRouteLongName
+          }
+        })
+        return legObj;
+      })
+      console.log(legs);
     });
 }

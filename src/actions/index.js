@@ -87,7 +87,6 @@ export function parseRouteData(itinerary, dispatch){
       legRouteLongName = null;
     }
     const legObj = {
-      [newId]: {
         legMode: leg.mode,
         legToName: leg.to.name,
         legFromName: leg.from.name,
@@ -97,7 +96,7 @@ export function parseRouteData(itinerary, dispatch){
         legGeometry: leg.legGeometry.points,
         legRouteShortName: legRouteShortName,
         legRouteLongName: legRouteLongName
-      }};
+      };
     return legObj;
   });
   dispatch(addItineraryById(legs));

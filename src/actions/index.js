@@ -81,8 +81,8 @@ export function fetchRoute(data) {
           legRouteShortName = null;
           legRouteLongName = null;
         }
-        const legObj = Object.assign({}, {}, {
-          [newId] : {
+        const legObj = {
+          [newId]: {
             legMode: leg.mode,
             legToName: leg.to.name,
             legFromName: leg.from.name,
@@ -92,10 +92,9 @@ export function fetchRoute(data) {
             legGeometry: leg.legGeometry.points,
             legRouteShortName: legRouteShortName,
             legRouteLongName: legRouteLongName
-          }
-        })
-        return legObj;
+          }}
+          return legObj;
       })
-      console.log(legs);
+      addItineraryById(legs);
     });
 }

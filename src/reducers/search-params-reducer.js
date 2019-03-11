@@ -8,7 +8,7 @@ export default (state = {}, action) => {
   switch (action.type) {
   case types.ADD_SEARCH_PARAMS:
     newState = Object.assign({}, state, {
-      [id] : {
+      [id]: {
         toPlace: toPlace,
         fromPlace: fromPlace,
         departOrArrive: departOrArrive,

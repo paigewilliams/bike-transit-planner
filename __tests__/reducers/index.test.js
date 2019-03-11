@@ -102,29 +102,33 @@ describe('itinerariesByIdReducer', () => {
       id: id
     };
     expect(itinerariesByIdReducer({}, action)).toEqual({
-      [id]: {
-        0: {
-          legMode: 'BICYCLE',
-          legToName: 'E Burnside & SE Sandy',
-          legFromName: '2023 NE 12TH AVE PORTLAND',
-          legToStopId: 'Trimet:13327',
-          legDistance: 2039.226,
-          LegStartTime: 1552290851000,
-          legGeometry: 'a_}tGnwrkVbD@lC@r@?jA?N?RBvB@?k@@eB?}@?yD?QN?dA?X@^??i@Rs@Je@DKHIHEJA^?lF@N@H?HBHFDHBL@L?|A\@?nA?H?NAhA?H?ZX',
-          legRouteLongName: null,
-          legRouteShortName: null
-        },
-        1: {
-          legMode: 'BUS',
-          legToName: 'SE Stark & NE Hale',
-          legFromName: 'E Burnside & SE Sandy',
-          legToStopId: 'TriMet:5397',
-          legDistance: 19959.03391270114,
-          legGeometry: 'ceztG`trkV?s@?U?O@eA?kADW?M?OEa@?{@?}',
-          legRouteShortName: '20',
-          legRouteLongName: 'Burnside/Stark'
+      [id]:{
+        legs: {
+          0: {
+            legMode: 'BICYCLE',
+            legToName: 'E Burnside & SE Sandy',
+            legFromName: '2023 NE 12TH AVE PORTLAND',
+            legToStopId: 'Trimet:13327',
+            legDistance: 2039.226,
+            LegStartTime: 1552290851000,
+            legGeometry: 'a_}tGnwrkVbD@lC@r@?jA?N?RBvB@?k@@eB?}@?yD?QN?dA?X@^??i@Rs@Je@DKHIHEJA^?lF@N@H?HBHFDHBL@L?|A\@?nA?H?NAhA?H?ZX',
+            legRouteLongName: null,
+            legRouteShortName: null
+          },
+          1: {
+            legMode: 'BUS',
+            legToName: 'SE Stark & NE Hale',
+            legFromName: 'E Burnside & SE Sandy',
+            legToStopId: 'TriMet:5397',
+            legDistance: 19959.03391270114,
+            legGeometry: 'ceztG`trkV?s@?U?O@eA?kADW?M?OEa@?{@?}',
+            legRouteShortName: '20',
+            legRouteLongName: 'Burnside/Stark'
+          }
         }
-      }
+
+        }
+
     })
 
 

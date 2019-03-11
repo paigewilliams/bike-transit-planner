@@ -12,13 +12,13 @@ export const addSearchParams = ({toPlace, fromPlace, departOrArrive, date, dista
   id: v4()
 });
 
-export const addItineraryById = ({ legs }) => ({
+export const addItineraryById = (legs) => ({
   type: types.ADD_ITINERARY,
   legs: legs,
   id: v4()
 });
 
-function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }) {
+function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }, dispatch) {
   const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
   let cleanCoords = [];
   placesForCoords.forEach(function(place){
@@ -28,7 +28,7 @@ function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceFo
       .then((json) => {
         cleanCoords.push(json.results[0].geometry.location);
         if (cleanCoords.length === 2){
-          fetchRoute({ distance, cleanCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date });
+          fetchRoute({ distance, cleanCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }, dispatch);
         }
       });
   });
@@ -38,7 +38,7 @@ function formatAddress(address, regex){
   return address.toUpperCase().replace(/\s/g, regex);
 }
 
-export function processUserInputForAPICall({toPlace, fromPlace, departOrArrive, date, distance, time}) {
+export function processUserInputForAPICall({toPlace, fromPlace, departOrArrive, date, distance, time}, dispatch) {
   const distanceAsMeters = Math.round(parseInt(distance) * 1609);
   const formattedToPlaceForCoords = formatAddress(toPlace, '+');
   const formattedFromPlaceForCoords = formatAddress(fromPlace, '+');
@@ -63,19 +63,18 @@ function militaryToStandardTime(time){
   return (time[0].charAt(0) == 1 && time[0].charAt(1) > 2) ? (time[0] - 12) + '%3A' + time[1] + 'pm' : time.join('%3A') + 'am';
 }
 
-export function fetchRoute(data) {
+export function fetchRoute(data, dispatch) {
   const { departOrArrive, distance, fromPlaceForTrimet, cleanCoords, time, toPlaceForTrimet, date } = data;
-    return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace='+fromPlaceForTrimet+'%3A%3A'+cleanCoords[1].lat+'%2C'+cleanCoords[1].lng+'&fromPlace='+toPlaceForTrimet+'%3A%3A'+cleanCoords[0].lat+'%2C'+cleanCoords[0].lng+'').then(
-      response => response.json(),
-      error => console.log('an error occured', error))
-      .then(json => {
-        const itinerary = json.plan.itineraries[0].legs;
-        parseRouteData(itinerary);
-      });
+  return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace='+fromPlaceForTrimet+'%3A%3A'+cleanCoords[1].lat+'%2C'+cleanCoords[1].lng+'&fromPlace='+toPlaceForTrimet+'%3A%3A'+cleanCoords[0].lat+'%2C'+cleanCoords[0].lng+'').then(
+    response => response.json(),
+    error => console.log('an error occured', error))
+    .then(json => {
+      const itinerary = json.plan.itineraries[0].legs;
+      parseRouteData(itinerary);
+    });
 }
 
-export function parseRouteData(itinerary){
-  console.log('in parseRouteData', itinerary);
+export function parseRouteData(itinerary, dispatch){
   const legs = itinerary.map(function(leg){
     let newId = v4();
     let legRouteLongName;
@@ -98,12 +97,15 @@ export function parseRouteData(itinerary){
         legGeometry: leg.legGeometry.points,
         legRouteShortName: legRouteShortName,
         legRouteLongName: legRouteLongName
-      }}
-      return legObj;
-  })
-  assignRouteToState(legs);
+      }};
+    return legObj;
+  });
+  assignRouteToState(legs, dispatch);
 }
 
-export function assignRouteToState(legs){
-  console.log('in assignRouteToState', legs)
+export function assignRouteToState(legs, dispatch){
+  console.log(legs);
+  return function(dispatch){
+    dispatch(addItineraryById(legs));
+  };
 }

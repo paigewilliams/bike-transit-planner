@@ -6,15 +6,15 @@ export default (state = {}, action) => {
   const { id, legs } = action;
 
   switch (action.type){
-    case types.ADD_ITINERARY:
+  case types.ADD_ITINERARY:
 
-      newState = Object.assign({}, state, {
-        [id]: {
-          legs: legs
-        }
-      });
-      return newState;
-    default:
-      return state;
+    newState = Object.assign({}, state, {
+      [id]: {
+        legs: legs
+      }
+    });
+    return newState;
+  default:
+    return state;
   }
-}
+};

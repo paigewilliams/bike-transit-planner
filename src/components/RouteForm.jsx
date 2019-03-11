@@ -67,7 +67,7 @@ function RouteForm({ dispatch, onFormSubmission}) {
           time: _time.value
         };
         dispatch(addSearchParams(input));
-        processUserInputForAPICall(input);
+        processUserInputForAPICall(input, dispatch);
         onFormSubmission();
         _toPlace = '';
         _fromPlace = '';

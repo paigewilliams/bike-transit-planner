@@ -65,36 +65,45 @@ function militaryToStandardTime(time){
 
 export function fetchRoute(data) {
   const { departOrArrive, distance, fromPlaceForTrimet, cleanCoords, time, toPlaceForTrimet, date } = data;
-  return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace='+fromPlaceForTrimet+'%3A%3A'+cleanCoords[1].lat+'%2C'+cleanCoords[1].lng+'&fromPlace='+toPlaceForTrimet+'%3A%3A'+cleanCoords[0].lat+'%2C'+cleanCoords[0].lng+'').then(
-    response => response.json(),
-    error => console.log('an error occured', error))
-    .then(json => {
-      const itinerary = json.plan.itineraries[0].legs;
-      const legs = itinerary.map(function(leg){
-        let newId = v4();
-        let legRouteLongName;
-        let legRouteShortName;
-        if (leg.routeShortName !== undefined && leg.routeLongName !== undefined){
-          legRouteShortName = leg.routeShortName;
-          legRouteLongName = leg.routeLongName;
-        } else {
-          legRouteShortName = null;
-          legRouteLongName = null;
-        }
-        const legObj = {
-          [newId]: {
-            legMode: leg.mode,
-            legToName: leg.to.name,
-            legFromName: leg.from.name,
-            legToStopId: leg.to.stopId,
-            legDistance: leg.distance,
-            legStartTime: leg.startTime,
-            legGeometry: leg.legGeometry.points,
-            legRouteShortName: legRouteShortName,
-            legRouteLongName: legRouteLongName
-          }}
-          return legObj;
-      })
-      addItineraryById(legs);
-    });
+    return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace='+fromPlaceForTrimet+'%3A%3A'+cleanCoords[1].lat+'%2C'+cleanCoords[1].lng+'&fromPlace='+toPlaceForTrimet+'%3A%3A'+cleanCoords[0].lat+'%2C'+cleanCoords[0].lng+'').then(
+      response => response.json(),
+      error => console.log('an error occured', error))
+      .then(json => {
+        const itinerary = json.plan.itineraries[0].legs;
+        parseRouteData(itinerary);
+      });
+}
+
+export function parseRouteData(itinerary){
+  console.log('in parseRouteData', itinerary);
+  const legs = itinerary.map(function(leg){
+    let newId = v4();
+    let legRouteLongName;
+    let legRouteShortName;
+    if (leg.routeShortName !== undefined && leg.routeLongName !== undefined){
+      legRouteShortName = leg.routeShortName;
+      legRouteLongName = leg.routeLongName;
+    } else {
+      legRouteShortName = null;
+      legRouteLongName = null;
+    }
+    const legObj = {
+      [newId]: {
+        legMode: leg.mode,
+        legToName: leg.to.name,
+        legFromName: leg.from.name,
+        legToStopId: leg.to.stopId,
+        legDistance: leg.distance,
+        legStartTime: leg.startTime,
+        legGeometry: leg.legGeometry.points,
+        legRouteShortName: legRouteShortName,
+        legRouteLongName: legRouteLongName
+      }}
+      return legObj;
+  })
+  assignRouteToState(legs);
+}
+
+export function assignRouteToState(legs){
+  console.log('in assignRouteToState', legs)
 }

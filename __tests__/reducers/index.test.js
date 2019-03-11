@@ -1,4 +1,5 @@
 import searchParamsReducer from './../../src/reducers/search-params-reducer';
+import itinerariesByIdReducer from './../../src/reducers/itineraries-by-id-reducer';
 import rootReducer from './../../src/reducers/index';
 import { createStore } from 'redux';
 import constants from './../../src/constants';
@@ -20,7 +21,8 @@ describe('rootReducer', () => {
 
   test('should return default state if no action type is recognized', () => {
     expect(rootReducer({}, { type: null })).toEqual({
-      searchParams: {}
+      searchParams: {},
+      itinerariesById: {}
     });
   });
 
@@ -56,5 +58,13 @@ describe('searchParamsReducer', () => {
       }
     });
   });
-
 });
+
+describe('itinerariesByIdReducer', () => {
+
+  test('should return default state if no action type is recognized', () => {
+    expect(itinerariesByIdReducer({}, { type: null })).toEqual({});
+  });
+
+
+})

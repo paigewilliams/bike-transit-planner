@@ -100,10 +100,5 @@ export function parseRouteData(itinerary, dispatch){
       }};
     return legObj;
   });
-  assignRouteToState(legs, dispatch);
-}
-
-export function assignRouteToState(legs, dispatch){
-    dispatch(addItineraryById(legs));
-
+  dispatch(addItineraryById(legs));
 }

@@ -1,7 +1,7 @@
 import constants from './../constants';
 const { types } = constants;
 
-export default (state = {}, action)=> {
+export default (state = {}, action) => {
   let newState;
   const { toPlace, fromPlace, departOrArrive, date, distance, id, time } = action;
 

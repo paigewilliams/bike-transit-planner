@@ -63,6 +63,6 @@ export function fetchRoute(data) {
     response => response.json(),
     error => console.log('an error occured', error))
     .then(json => {
-      console.log(json);
+      console.log(json.plan.itineraries[0]);
     });
 }

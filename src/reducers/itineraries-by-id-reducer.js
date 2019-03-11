@@ -1,7 +1,7 @@
 import constants from './../constants';
-const { types } = constants;
+const { types, initialState } = constants;
 
-export default (state = {}, action) => {
+const itinerariesByIdReducer = (state = initialState.itinerariesById, action) => {
   let newState;
   const { id, legs } = action;
   switch (action.type){
@@ -16,3 +16,5 @@ export default (state = {}, action) => {
     return state;
   }
 };
+
+export default itinerariesByIdReducer;

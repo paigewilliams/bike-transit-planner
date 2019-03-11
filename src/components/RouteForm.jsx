@@ -57,7 +57,6 @@ function RouteForm({ dispatch, onFormSubmission}) {
       <h3>Plan a route:</h3>
       <form onSubmit={e => {
         e.preventDefault();
-
         const input = {
           toPlace: _toPlace.value,
           fromPlace: _fromPlace.value,

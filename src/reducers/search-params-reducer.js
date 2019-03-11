@@ -1,7 +1,7 @@
 import constants from './../constants';
-const { types } = constants;
+const { types, initialState } = constants;
 
-export default (state = {}, action) => {
+const searchParamsReducer = (state = initialState.searchParams, action) => {
   let newState;
   const { toPlace, fromPlace, departOrArrive, date, distance, id, time } = action;
 
@@ -23,3 +23,5 @@ export default (state = {}, action) => {
     return state;
   }
 };
+
+export default searchParamsReducer;

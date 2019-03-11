@@ -55,7 +55,7 @@ export function processUserInputForAPICall({toPlace, fromPlace, departOrArrive, 
     time: formattedTime,
     date: date
   };
-  fetchCoords(data);
+  fetchCoords(data, dispatch);
 }
 
 function militaryToStandardTime(time){
@@ -70,7 +70,7 @@ export function fetchRoute(data, dispatch) {
     error => console.log('an error occured', error))
     .then(json => {
       const itinerary = json.plan.itineraries[0].legs;
-      parseRouteData(itinerary);
+      parseRouteData(itinerary, dispatch);
     });
 }
 
@@ -104,8 +104,6 @@ export function parseRouteData(itinerary, dispatch){
 }
 
 export function assignRouteToState(legs, dispatch){
-  console.log(legs);
-  return function(dispatch){
     dispatch(addItineraryById(legs));
-  };
+
 }

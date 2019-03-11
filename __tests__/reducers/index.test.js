@@ -95,7 +95,7 @@ describe('itinerariesByIdReducer', () => {
   });
 
   test('should succeddfully add new itinerary with legs to itineraryById state slice', () => {
-    console.log(sampleItinerary.legs)
+  
     const { id, legs } = sampleItinerary;
     action = {
       type: types.ADD_ITINERARY,
@@ -122,6 +122,7 @@ describe('itinerariesByIdReducer', () => {
             legFromName: 'E Burnside & SE Sandy',
             legToStopId: 'TriMet:5397',
             legDistance: 19959.03391270114,
+            legStartTime: 1552291320000,
             legGeometry: 'ceztG`trkV?s@?U?O@eA?kADW?M?OEa@?{@?}',
             legRouteShortName: '20',
             legRouteLongName: 'Burnside/Stark'

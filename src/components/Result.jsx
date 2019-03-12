@@ -7,12 +7,12 @@ const Time = styled.p`
   margin-top: -0.75rem;
   color: tomato;
 `;
-function Result(props){
-  
+function Result({ mode, direction, distance, routeLongName, routeShortName, legStartTime, legFromTime, legToStopId, legFromName}){
+  distance = Math.round((distance * 0.00062137) * 100) / 100;
   return (
     <div>
-      <p>{props.mode} to {props.direction}</p>
-      <Time>Time: {props.time}</Time>
+      <p>{mode} to {direction} from {legFromName}</p>
+      <Time>{distance} miles</Time>
     </div>
   );
 }
@@ -20,7 +20,12 @@ function Result(props){
 Result.propTypes = {
   mode: PropTypes.string,
   direction: PropTypes.string,
-  time: PropTypes.string
+  distance: PropTypes.number,
+  routeLongName: PropTypes.string,
+  routeShortName: PropTypes.string,
+  legStartTime: PropTypes.number,
+  legFromTime: PropTypes.string,
+  legToStopId: PropTypes.string,
 };
 
 export default Result;

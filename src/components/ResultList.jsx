@@ -32,7 +32,7 @@ class ResultList extends React.Component {
             legStartTime={leg.legStartTime}
             legFromName={leg.legFromName}
             legToStopId={leg.legToStopId}
-             key={index}/>;
+            key={index}/>;
         });
       });
     }

@@ -1,5 +1,6 @@
 import * as types from './../constants/ActionTypes';
 import v4 from 'uuid/v4';
+import polyline from '@mapbox/polyline';
 
 export const addSearchParams = ({toPlace, fromPlace, departOrArrive, date, distance, time}) => ({
   type: types.ADD_SEARCH_PARAMS,
@@ -17,6 +18,12 @@ export const addItineraryById = (legs, id) => ({
   legs: legs,
   id: id
 });
+
+export const addGeojsonById = (geojson, id) => ({
+  type: types.ADD_GEOJSON,
+  geojson: geojson,
+  id: id
+})
 
 function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }, dispatch) {
   const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
@@ -99,5 +106,14 @@ export function parseRouteData(itinerary, dispatch){
     };
     return legObj;
   });
+  createGeojson(legs, newId, dispatch);
   dispatch(addItineraryById(legs, newId));
+}
+
+function createGeojson(legs, newId, dispatch){
+  const decodedLines = legs.map(function(leg) {
+    const newLine = polyline.toGeoJSON(leg.legGeometry);
+    return newLine;
+  })
+  dispatch(addGeojsonById(decodedLines, newId))
 }

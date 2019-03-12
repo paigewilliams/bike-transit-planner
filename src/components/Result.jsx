@@ -8,7 +8,7 @@ const Time = styled.p`
   color: tomato;
 `;
 function Result(props){
-  console.log(props);
+  
   return (
     <div>
       <p>{props.mode} to {props.direction}</p>

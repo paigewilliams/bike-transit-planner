@@ -22,7 +22,7 @@ class ResultList extends React.Component {
     if(Object.keys(itineraries).length > 0 && itineraries.constructor === Object){
       renderedList = Object.keys(itineraries).map(id => {
         let itinerary = itineraries[id].legs;
-        return itinerary.map(leg => {
+        return itinerary.map((leg, index) => {
           return <Result
             mode={leg.legMode}
             direction={leg.legToName}
@@ -31,7 +31,8 @@ class ResultList extends React.Component {
             routeShortName={leg.legRouteShortName}
             legStartTime={leg.legStartTime}
             legFromName={leg.legFromName}
-            legToStopId={leg.legToStopId} />;
+            legToStopId={leg.legToStopId}
+             key={index}/>;
         });
       });
     }

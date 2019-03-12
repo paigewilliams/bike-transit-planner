@@ -12,10 +12,10 @@ export const addSearchParams = ({toPlace, fromPlace, departOrArrive, date, dista
   id: v4()
 });
 
-export const addItineraryById = (legs) => ({
+export const addItineraryById = (legs, id) => ({
   type: types.ADD_ITINERARY,
   legs: legs,
-  id: v4()
+  id: id
 });
 
 function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }, dispatch) {
@@ -75,8 +75,8 @@ export function fetchRoute(data, dispatch) {
 }
 
 export function parseRouteData(itinerary, dispatch){
+  let newId = v4();
   const legs = itinerary.map(function(leg){
-    let newId = v4();
     let legRouteLongName;
     let legRouteShortName;
     if (leg.routeShortName !== undefined && leg.routeLongName !== undefined){
@@ -87,17 +87,17 @@ export function parseRouteData(itinerary, dispatch){
       legRouteLongName = null;
     }
     const legObj = {
-        legMode: leg.mode,
-        legToName: leg.to.name,
-        legFromName: leg.from.name,
-        legToStopId: leg.to.stopId,
-        legDistance: leg.distance,
-        legStartTime: leg.startTime,
-        legGeometry: leg.legGeometry.points,
-        legRouteShortName: legRouteShortName,
-        legRouteLongName: legRouteLongName
-      };
+      legMode: leg.mode,
+      legToName: leg.to.name,
+      legFromName: leg.from.name,
+      legToStopId: leg.to.stopId,
+      legDistance: leg.distance,
+      legStartTime: leg.startTime,
+      legGeometry: leg.legGeometry.points,
+      legRouteShortName: legRouteShortName,
+      legRouteLongName: legRouteLongName
+    };
     return legObj;
   });
-  dispatch(addItineraryById(legs));
+  dispatch(addItineraryById(legs, newId));
 }

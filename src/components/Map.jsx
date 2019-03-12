@@ -33,11 +33,11 @@ class Map extends React.Component {
       zoom
     });
     this.map.on('move', () => {
-      const { lng, lat } = map.getCenter();
+      const { lng, lat } = this.map.getCenter();
       this.setState({
         lng: lng.toFixed(4),
         lat: lat.toFixed(4),
-        zoom: map.getZoom().toFixed(2)
+        zoom: this.map.getZoom().toFixed(2)
       });
     });
 
@@ -67,8 +67,8 @@ class Map extends React.Component {
               'line-cap': 'round'
             },
             'paint': {
-              'line-color': '#FF0000',
-              'line-width': 8
+              'line-color': '#ff6347',
+              'line-width': 6
             }
           })
         })

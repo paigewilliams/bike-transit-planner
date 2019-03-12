@@ -3,13 +3,13 @@ import styled from 'styled-components';
 import mapboxgl from 'mapbox-gl';
 
 
+
 mapboxgl.accessToken = process.env.API_KEY;
 
 const MapStyles = styled.div`
   height: 100%;
   width: 100%;
 `;
-
 
 class Map extends React.Component {
 
@@ -24,17 +24,14 @@ class Map extends React.Component {
 
   componentDidMount(){
     const { lat, lng, zoom } = this.state;
-
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/light-v9',
       center: [lng, lat],
       zoom
     });
-
     map.on('move', () => {
       const { lng, lat } = map.getCenter();
-
       this.setState({
         lng: lng.toFixed(4),
         lat: lat.toFixed(4),
@@ -45,7 +42,6 @@ class Map extends React.Component {
 
   render(){
     const { lng, lat, zoom } = this.state;
-
     return(
       <div>
         <MapStyles ref={el => this.mapContainer = el}  />
@@ -53,5 +49,7 @@ class Map extends React.Component {
     );
   }
 }
+
+
 
 export default Map;

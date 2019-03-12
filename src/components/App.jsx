@@ -4,7 +4,7 @@ import Header from './Header';
 import Sidebar from './Sidebar';
 import styled from 'styled-components';
 import GlobalStyle from '../theme/GlobalStyle';
-import MapData from './MapData';
+
 
 const Container = styled.div`
   display: grid;
@@ -20,7 +20,6 @@ function App() {
       <Header />
       <Sidebar />
       <Map />
-      <MapData />
     </Container>
   );
 }

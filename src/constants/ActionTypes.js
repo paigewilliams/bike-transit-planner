@@ -1,2 +1,3 @@
 export const ADD_SEARCH_PARAMS = 'ADD_SEARCH_PARAMS';
 export const ADD_ITINERARY = 'ADD_ITINERARY';
+export const ADD_GEOJSON = 'ADD_GEOJSON';

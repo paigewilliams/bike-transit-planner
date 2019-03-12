@@ -18,7 +18,7 @@ class Map extends React.Component {
     this.state = {
       lat: 45.5122,
       lng: -122.6587,
-      zoom: 11
+      zoom: 10
     };
   }
 
@@ -41,16 +41,16 @@ class Map extends React.Component {
 
     map.on('load', () => {
       map.addLayer({
-        "id": "route",
-        "type": "line",
-        "source": {
-          "type": "geojson",
-          "data": {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
+        'id': 'route',
+        'type': 'line',
+        'source': {
+          'type': 'geojson',
+          'data': {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+              'type': 'LineString',
+              'coordinates': [
                 [-122.42665, 45.50247],
                 [-122.42697, 45.50254],
                 [-122.42698, 45.5025],
@@ -69,29 +69,29 @@ class Map extends React.Component {
             }
           }
         },
-        "layout": {
-          "line-join": "round",
-          "line-cap": "round"
-          },
-          "paint": {
-          "line-color": "#ff6347",
-          "line-width": 8
-          }
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': '#ff6347',
+          'line-width': 8
+        }
       });
     });
 
     map.on('load', () => {
       map.addLayer({
-        "id": "route1",
-        "type": "line",
-        "source": {
-          "type": "geojson",
-          "data": {
-            "type": "Feature",
-            "properties": {},
-            "geometry": {
-              "type": "LineString",
-              "coordinates": [
+        'id': 'route1',
+        'type': 'line',
+        'source': {
+          'type': 'geojson',
+          'data': {
+            'type': 'Feature',
+            'properties': {},
+            'geometry': {
+              'type': 'LineString',
+              'coordinates': [
                 [-122.37823, 45.53726],
                 [-122.37813, 45.5373],
                 [-122.37805, 45.53734],
@@ -113,14 +113,14 @@ class Map extends React.Component {
             }
           }
         },
-        "layout": {
-          "line-join": "round",
-          "line-cap": "round"
-          },
-          "paint": {
-          "line-color": "#FF0000",
-          "line-width": 8
-          }
+        'layout': {
+          'line-join': 'round',
+          'line-cap': 'round'
+        },
+        'paint': {
+          'line-color': '#FF0000',
+          'line-width': 8
+        }
       });
     });
   }

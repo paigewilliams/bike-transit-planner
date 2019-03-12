@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import mapboxgl from 'mapbox-gl';
-
+import { connect } from 'react-redux';
 
 
 mapboxgl.accessToken = process.env.API_KEY;
@@ -24,6 +24,7 @@ class Map extends React.Component {
 
   componentDidMount(){
     const { lat, lng, zoom } = this.state;
+
     const map = new mapboxgl.Map({
       container: this.mapContainer,
       style: 'mapbox://styles/mapbox/light-v9',
@@ -127,6 +128,8 @@ class Map extends React.Component {
 
   render(){
     const { lng, lat, zoom } = this.state;
+    const { data } = this.props
+    console.log(data);
     return(
       <div>
         <MapStyles ref={el => this.mapContainer = el}  />
@@ -135,6 +138,10 @@ class Map extends React.Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    data: state.geojsonById
+  }
+}
 
-
-export default Map;
+export default connect(mapStateToProps)(Map);

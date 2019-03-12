@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 function MapData(props){
 
 
-  if (props.itineraries !== {}) {
+  if (props.itineraries !== {} ) {
     let allLines = [];
     Object.keys(props.itineraries).map(function(itineraryKey) {
       const itinerary = props.itineraries[itineraryKey];

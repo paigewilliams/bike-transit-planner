@@ -1,5 +1,6 @@
 import searchParamsReducer from './../../src/reducers/search-params-reducer';
 import itinerariesByIdReducer from './../../src/reducers/itineraries-by-id-reducer';
+import geojsonByIdReducer from './../../src/reducers/geojson-by-id-reducer';
 import rootReducer from './../../src/reducers/index';
 import { createStore } from 'redux';
 import constants from './../../src/constants';
@@ -50,12 +51,17 @@ describe('rootReducer', () => {
   test('should return default state if no action type is recognized', () => {
     expect(rootReducer({}, { type: null })).toEqual({
       searchParams: {},
-      itinerariesById: {}
+      itinerariesById: {},
+      geojsonById: {}
     });
   });
 
   test('should contain searchParamsReducer logic', () => {
     expect(store.getState().searchParams).toEqual(searchParamsReducer(undefined, { type: null }));
+  });
+
+  test('should contain itinerariesByIdReducer logic', () => {
+    expect(store.getState().itinerariesById).toEqual(itinerariesByIdReducer(undefined, { type: null }));
   });
 });
 
@@ -95,7 +101,7 @@ describe('itinerariesByIdReducer', () => {
   });
 
   test('should succeddfully add new itinerary with legs to itineraryById state slice', () => {
-  
+
     const { id, legs } = sampleItinerary;
     action = {
       type: types.ADD_ITINERARY,

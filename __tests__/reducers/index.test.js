@@ -46,6 +46,33 @@ const sampleItinerary = {
 
 }
 
+const sampleGeojson = {
+  id: 0,
+  geojson: {
+    0: {
+      type: "LineString",
+      coordinates:
+      [
+        [-122.65359, 45.53008],
+        [-122.65364, 45.53008]
+      ]
+    },
+    1: {
+      type: "LineString",
+      coordinates:
+      [
+        [-122.42665, 45.50247],
+        [-122.42697, 45.50254],
+        [-122.42698, 45.5025],
+        [-122.42662, 45.50243],
+        [-122.42632, 45.5024],
+        [-122.42633, 45.50244]
+      ]
+    }
+  }
+}
+
+
 describe('rootReducer', () => {
 
   test('should return default state if no action type is recognized', () => {
@@ -104,7 +131,7 @@ describe('itinerariesByIdReducer', () => {
     expect(itinerariesByIdReducer({}, { type: null })).toEqual({});
   });
 
-  test('should succeddfully add new itinerary with legs to itineraryById state slice', () => {
+  test('should successfully add new itinerary with legs to itineraryById state slice', () => {
 
     const { id, legs } = sampleItinerary;
     action = {
@@ -147,4 +174,41 @@ describe('geojsonByIdReducer', () => {
   test('should return default state if no action type is recognized', () => {
     expect(geojsonByIdReducer({}, { type: null })).toEqual({});
   });
+
+  test('should successfully add new geojson to with data to geojsonById state slice', () => {
+
+    const { id, geojson } = sampleGeojson;
+    action = {
+      type: types.ADD_GEOJSON,
+      geojson: geojson,
+      id: id
+    }
+    expect(geojsonByIdReducer({}, action)).toEqual({
+      [id] : {
+        geojson: {
+          0: {
+            type: "LineString",
+            coordinates:
+            [
+              [-122.65359, 45.53008],
+              [-122.65364, 45.53008]
+
+            ]
+          },
+          1: {
+            type: "LineString",
+            coordinates:
+            [
+              [-122.42665, 45.50247],
+              [-122.42697, 45.50254],
+              [-122.42698, 45.5025],
+              [-122.42662, 45.50243],
+              [-122.42632, 45.5024],
+              [-122.42633, 45.50244]
+            ]
+          }
+        }
+      }
+    })
+  })
 })

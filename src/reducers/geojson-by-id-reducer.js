@@ -5,7 +5,7 @@ const geojsonByIdReducer = (state = initialState.geojsonById, action) => {
   let newState;
   const { id, geojson } = action;
   switch (action.type) {
-    case types.ADD_GEOJSON:
+  case types.ADD_GEOJSON:
     newState = Object.assign({}, state, {
       [id]: {
         geojson: geojson
@@ -15,6 +15,6 @@ const geojsonByIdReducer = (state = initialState.geojsonById, action) => {
   default:
     return state;
   }
-}
+};
 
 export default geojsonByIdReducer;

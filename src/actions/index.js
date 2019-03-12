@@ -23,7 +23,7 @@ export const addGeojsonById = (geojson, id) => ({
   type: types.ADD_GEOJSON,
   geojson: geojson,
   id: id
-})
+});
 
 function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }, dispatch) {
   const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
@@ -114,6 +114,6 @@ function createGeojson(legs, newId, dispatch){
   const decodedLines = legs.map(function(leg) {
     const newLine = polyline.toGeoJSON(leg.legGeometry);
     return newLine;
-  })
-  dispatch(addGeojsonById(decodedLines, newId))
+  });
+  dispatch(addGeojsonById(decodedLines, newId));
 }

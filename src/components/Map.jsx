@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import mapboxgl from 'mapbox-gl';
 import { connect } from 'react-redux';
-
+import v4 from 'uuid/v4';
 
 mapboxgl.accessToken = process.env.API_KEY;
 
@@ -22,8 +22,6 @@ class Map extends React.Component {
     };
   }
 
-
-
   componentDidMount(){
     const { lat, lng, zoom } = this.state;
     this.map = new mapboxgl.Map({
@@ -40,8 +38,6 @@ class Map extends React.Component {
         zoom: this.map.getZoom().toFixed(2)
       });
     });
-
-
   }
 
   componentDidUpdate(){
@@ -52,7 +48,7 @@ class Map extends React.Component {
         let mapComponent = this.map;
         legs.forEach((leg, i) => {
           mapComponent.addLayer({
-            'id': `${i}`,
+            'id': v4(),
             'type': 'line',
             'source': {
               'type': 'geojson',

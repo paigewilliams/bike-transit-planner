@@ -47,47 +47,32 @@ class Map extends React.Component {
   componentDidUpdate(){
     const { data } = this.props;
     if(data !== {}){
-        this.map.addLayer({
-          'id': 'route1',
-          'type': 'line',
-          'source': {
-            'type': 'geojson',
-            'data': {
-              'type': 'Feature',
-              'properties': {},
-              'geometry': {
-                'type': 'LineString',
-                'coordinates': [
-                  [-122.37823, 45.53726],
-                  [-122.37813, 45.5373],
-                  [-122.37805, 45.53734],
-                  [-122.37802, 45.53738],
-                  [-122.37801, 45.53741],
-                  [-122.37802, 45.53746],
-                  [-122.37806, 45.53752],
-                  [-122.37804, 45.53755],
-                  [-122.37803, 45.53758],
-                  [-122.37805, 45.53761],
-                  [-122.37787, 45.53767],
-                  [-122.37776, 45.53773],
-                  [-122.37783, 45.53781],
-                  [-122.37784, 45.53784],
-                  [-122.37786, 45.53787],
-                  [-122.37796, 45.53783],
-                  [-122.37799, 45.53782]
-                ]
-              }
-            }
-          },
-          'layout': {
-            'line-join': 'round',
-            'line-cap': 'round'
-          },
-          'paint': {
-            'line-color': '#FF0000',
-            'line-width': 8
-          }
-        });
+      console.log(data);
+      // Object.keys(data).map(function(id){
+      //   let legs = data[id].geojson;
+      //   legs.forEach(function(leg, i){
+      //     this.map.addLayer({
+      //       'id': i,
+      //       'type': 'line',
+      //       'source': {
+      //         'type': 'geojson',
+      //         'data': {
+      //           'type': 'Feature',
+      //           'properties': {},
+      //           'geometry': leg
+      //         }
+      //       },
+      //       'layout': {
+      //         'line-join': 'round',
+      //         'line-cap': 'round'
+      //       },
+      //       'paint': {
+      //         'line-color': '#FF0000',
+      //         'line-width': 8
+      //       }
+      //     })
+      //   })
+      // })
     }
   }
 

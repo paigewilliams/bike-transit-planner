@@ -63,6 +63,10 @@ describe('rootReducer', () => {
   test('should contain itinerariesByIdReducer logic', () => {
     expect(store.getState().itinerariesById).toEqual(itinerariesByIdReducer(undefined, { type: null }));
   });
+
+  test('should contain geojsonByIdReducer logic', () => {
+    expect(store.getState(). geojsonById).toEqual(geojsonByIdReducer(undefined, { type: null}));
+  })
 });
 
 

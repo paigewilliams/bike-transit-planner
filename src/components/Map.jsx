@@ -47,32 +47,32 @@ class Map extends React.Component {
   componentDidUpdate(){
     const { data } = this.props;
     if(data !== {}){
-      console.log(data);
-      // Object.keys(data).map(function(id){
-      //   let legs = data[id].geojson;
-      //   legs.forEach(function(leg, i){
-      //     this.map.addLayer({
-      //       'id': i,
-      //       'type': 'line',
-      //       'source': {
-      //         'type': 'geojson',
-      //         'data': {
-      //           'type': 'Feature',
-      //           'properties': {},
-      //           'geometry': leg
-      //         }
-      //       },
-      //       'layout': {
-      //         'line-join': 'round',
-      //         'line-cap': 'round'
-      //       },
-      //       'paint': {
-      //         'line-color': '#FF0000',
-      //         'line-width': 8
-      //       }
-      //     })
-      //   })
-      // })
+      Object.keys(data).map((id) => {
+        let legs = data[id].geojson;
+        let mapComponent = this.map;
+        legs.forEach((leg, i) => {
+          mapComponent.addLayer({
+            'id': `${i}`,
+            'type': 'line',
+            'source': {
+              'type': 'geojson',
+              'data': {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': leg
+              }
+            },
+            'layout': {
+              'line-cap': 'round',
+              'line-cap': 'round'
+            },
+            'paint': {
+              'line-color': '#FF0000',
+              'line-width': 8
+            }
+          })
+        })
+      })
     }
   }
 

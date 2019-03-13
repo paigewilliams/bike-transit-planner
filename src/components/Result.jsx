@@ -8,12 +8,17 @@ const Time = styled.p`
   color: tomato;
 `;
 function Result({ mode, direction, distance, routeLongName, routeShortName, legStartTime, legFromTime, legToStopId, legFromName}){
-  distance = Math.round((distance * 0.00062137) * 100) / 100;
 
+  distance = Math.round((distance * 0.00062137) * 100) / 100;
+  let routeData;
+  if(routeLongName && routeShortName !== undefined){
+    routeData =  `${routeShortName} to ${routeLongName}`;
+  }
   return (
     <div>
       <p>{mode} to {direction} from {legFromName}</p>
       <Time>{distance} miles</Time>
+      <p>{routeData}</p>
     </div>
   );
 }

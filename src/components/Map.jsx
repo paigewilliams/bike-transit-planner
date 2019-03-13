@@ -41,12 +41,15 @@ class Map extends React.Component {
   }
 
   componentDidUpdate(){
-    const { data } = this.props;
-    if(data !== {}){
-      Object.keys(data).map((id) => {
+    const { data, itineraries } = this.props;
+    if(Object.keys(itineraries).length > 0 && Object.keys(data).length > 0){
+      Object.keys(data, itineraries).map((id) => {
         let legs = data[id].geojson;
+        let itineraryMode = itineraries[id].legs;
         let mapComponent = this.map;
         legs.forEach((leg, i) => {
+          console.log(itineraryMode[i].legMode);
+          
           mapComponent.addLayer({
             'id': v4(),
             'type': 'line',
@@ -54,7 +57,9 @@ class Map extends React.Component {
               'type': 'geojson',
               'data': {
                 'type': 'Feature',
-                'properties': {},
+                'properties': {
+                  'mode' : itineraryMode[i].legMode
+                },
                 'geometry': leg
               }
             },
@@ -63,12 +68,22 @@ class Map extends React.Component {
               'line-cap': 'round'
             },
             'paint': {
-              'line-color': '#ff6347',
+              'line-color': [
+                'match',
+                ['get', 'mode'],
+                'BICYCLE', '#fbb03b',
+                'WALK', '#223b53',
+                'TRAM', '#e55e5e',
+                'BUS', '#3bb2d0',
+                '#ccc'
+              ],
               'line-width': 6
             }
-          })
-        })
-      })
+          });
+        });
+      });
+
+
     }
   }
 
@@ -84,7 +99,8 @@ class Map extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    data: state.geojsonById
+    data: state.geojsonById,
+    itineraries: state.itinerariesById
   }
 }
 

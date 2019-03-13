@@ -70,6 +70,7 @@ function militaryToStandardTime(time){
   return (time[0].charAt(0) == 1 && time[0].charAt(1) > 2) ? (time[0] - 12) + '%3A' + time[1] + 'pm' : time.join('%3A') + 'am';
 }
 
+
 export function fetchRoute(data, dispatch) {
   const { departOrArrive, distance, fromPlaceForTrimet, cleanCoords, time, toPlaceForTrimet, date } = data;
   return fetch('http://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy='+departOrArrive+'&time='+time+'&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance='+distance+'&date='+date+'&toPlace='+fromPlaceForTrimet+'%3A%3A'+cleanCoords[1].lat+'%2C'+cleanCoords[1].lng+'&fromPlace='+toPlaceForTrimet+'%3A%3A'+cleanCoords[0].lat+'%2C'+cleanCoords[0].lng+'').then(
@@ -89,15 +90,19 @@ export function parseRouteData(itinerary, dispatch){
     if (leg.routeShortName !== undefined && leg.routeLongName !== undefined){
       legRouteShortName = leg.routeShortName;
       legRouteLongName = leg.routeLongName;
+    } else if (leg.routeLongName !== undefined) {
+      legRouteLongName = leg.routeLongName;
+      legRouteShortName = null
     } else {
       legRouteShortName = null;
       legRouteLongName = null;
     }
+
     const legObj = {
       legMode: leg.mode,
       legToName: leg.to.name,
       legFromName: leg.from.name,
-      legToStopId: leg.to.stopId,
+      legToStopId: leg.to.stopCode,
       legDistance: leg.distance,
       legStartTime: leg.startTime,
       legGeometry: leg.legGeometry.points,

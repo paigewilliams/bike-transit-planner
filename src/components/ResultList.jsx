@@ -25,7 +25,7 @@ class ResultList extends React.Component {
         return itinerary.map((leg, index) => {
           return <Result
             mode={leg.legMode}
-            direction={leg.legToName}
+            legToName={leg.legToName}
             distance={leg.legDistance}
             routeLongName={leg.legRouteLongName}
             routeShortName={leg.legRouteShortName}

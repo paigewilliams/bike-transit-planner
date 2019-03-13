@@ -7,18 +7,23 @@ const Time = styled.p`
   margin-top: -0.75rem;
   color: tomato;
 `;
-function Result({ mode, direction, distance, routeLongName, routeShortName, legStartTime, legFromTime, legToStopId, legFromName}){
+function Result({ mode, legToName, distance, routeLongName, routeShortName, legStartTime, legToStopId, legFromName}){
 
   distance = Math.round((distance * 0.00062137) * 100) / 100;
   let routeData;
-  if(routeLongName && routeShortName !== undefined){
-    routeData =  `${routeShortName} to ${routeLongName}`;
+  let stopData
+  if(routeLongName && routeShortName !== null){
+    routeData =  `${routeShortName} to ${routeLongName} stop ID: ${legToStopId} `;
+  } else if (routeLongName !== null){
+    routeData = `${routeLongName}`;
   }
+
+
   return (
     <div>
-      <p>{mode} to {direction} from {legFromName}</p>
+      <p>{mode} from {legFromName} to {legToName}</p>
       <Time>{distance} miles</Time>
-      <p>{routeData}</p>
+      <Time>{routeData}</Time>
     </div>
   );
 }

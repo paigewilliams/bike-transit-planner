@@ -5,8 +5,12 @@ import PropTypes from 'prop-types';
 const Time = styled.p`
   font-size: 12px;
   margin-top: -0.75rem;
-  color: tomato;
+  color: FF816A;
 `;
+
+const Mode = styled.span`
+  color: ${props => (props.mode === 'BICYCLE') ? '#FFA547' : (props.mode === 'WALK') ? '#34BB62' : (props.mode === 'TRAM') ? '#FF6447' : (props.mode === 'BUS') ? '#31849F' : '#ccc' }
+`
 function Result({ mode, legToName, distance, routeLongName, routeShortName, legStartTime, legToStopId, legFromName}){
 
   distance = Math.round((distance * 0.00062137) * 100) / 100;
@@ -21,7 +25,7 @@ function Result({ mode, legToName, distance, routeLongName, routeShortName, legS
 
   return (
     <div>
-      <p>{mode} from {legFromName} to {legToName}</p>
+      <p><Mode mode={mode}>{mode}</Mode> from {legFromName} to {legToName}</p>
       <Time>{distance} miles</Time>
       <Time>{routeData}</Time>
     </div>

@@ -48,8 +48,6 @@ class Map extends React.Component {
         let itineraryMode = itineraries[id].legs;
         let mapComponent = this.map;
         legs.forEach((leg, i) => {
-          console.log(itineraryMode[i].legMode);
-          
           mapComponent.addLayer({
             'id': v4(),
             'type': 'line',
@@ -71,13 +69,13 @@ class Map extends React.Component {
               'line-color': [
                 'match',
                 ['get', 'mode'],
-                'BICYCLE', '#fbb03b',
-                'WALK', '#223b53',
-                'TRAM', '#e55e5e',
-                'BUS', '#3bb2d0',
+                'BICYCLE', '#FFA547',
+                'WALK', '#34BB62',
+                'TRAM', '#FF6447',
+                'BUS', '#31849F',
                 '#ccc'
               ],
-              'line-width': 6
+              'line-width': 4
             }
           });
         });

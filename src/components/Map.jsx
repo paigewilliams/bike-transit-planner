@@ -18,7 +18,7 @@ class Map extends React.Component {
     this.state = {
       lat: 45.5122,
       lng: -122.6587,
-      zoom: 10
+      zoom: 11
     };
   }
 

@@ -7,7 +7,7 @@ import { addSearchParams, processUserInputForAPICall } from './../actions';
 const FormStyles = styled.div`
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
+
 `;
 
 const TimeLine = styled.div`
@@ -23,7 +23,7 @@ const StyledInput = styled.input`
   background: transparent;
   font-size: 18px;
   margin-bottom: 2rem;
-  width: 15rem;
+  width: 95%;
 `;
 const StyledSelect = styled.select`
   font-size: 16px;

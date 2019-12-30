@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import RouteForm from './RouteForm';
 import styled from 'styled-components';
 import ResultList from './ResultList';
@@ -13,35 +13,17 @@ const SidebarStyles = styled.div`
   postion: fixed;
 `;
 
+const Sidebar = () => {
+  const [results, setResults] = useState(false);
 
-class Sidebar extends React.Component{
+  const handleHideForm = () => setResults(true);
 
-  constructor(props){
-    super(props);
-    this.state = {
-      resultsVisible: false
-    };
-    this.handleHideForm = this.handleHideForm.bind(this);
-  }
+  return (
+    <SidebarStyles>
+      {results ? <ResultList /> : <RouteForm onFormSubmission={handleHideForm} />}
+    </SidebarStyles>
+  );
 
-  handleHideForm(){
-    this.setState({resultsVisible: true});
-  }
-
-  render() {
-    let visibleContent = null;
-    if(this.state.resultsVisible){
-      visibleContent = <ResultList />;
-    } else {
-      visibleContent = <RouteForm onFormSubmission={this.handleHideForm}/>;
-    }
-    return(
-      <SidebarStyles>
-        {visibleContent}
-      </SidebarStyles>
-    );
-  }
-
-}
+};
 
 export default Sidebar;

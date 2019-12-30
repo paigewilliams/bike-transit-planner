@@ -9,17 +9,21 @@ const ResultListStyles = styled.div`
   flex-direction: column;
 `;
 
+const ReturnButton = styled.button`
+  margin: 1rem 1rem 0 0;
+`;
+
 class ResultList extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
   }
 
-  render(){
+  render() {
     let renderedList;
     const { itineraries } = this.props;
 
-    if(Object.keys(itineraries).length > 0 && itineraries.constructor === Object){
+    if (Object.keys(itineraries).length > 0 && itineraries.constructor === Object) {
       renderedList = Object.keys(itineraries).map(id => {
         let itinerary = itineraries[id].legs;
         return itinerary.map((leg, index) => {
@@ -32,15 +36,20 @@ class ResultList extends React.Component {
             legStartTime={leg.legStartTime}
             legFromName={leg.legFromName}
             legToStopId={leg.legToStopId}
-            key={index}/>;
+            key={index} />;
         });
       });
+    } else {
+      renderedList = <div>
+        <h3>Loading...</h3>
+      </div>;
     }
     return (
       <ResultListStyles>
-        <h3>Results:</h3>
+        <ReturnButton>Return to form</ReturnButton>
+        <h3> Results:</h3>
         {renderedList}
-      </ResultListStyles>
+      </ResultListStyles >
     );
   }
 

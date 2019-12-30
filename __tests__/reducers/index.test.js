@@ -16,11 +16,11 @@ const sampleSearchParams = {
   date: '2019-03-07',
   distance: '8047',
   id: 0
-}
+};
 
 const sampleItinerary = {
   id: 0,
-  legs:  {
+  legs: {
     0: {
       legMode: 'BICYCLE',
       legToName: 'E Burnside & SE Sandy',
@@ -42,35 +42,36 @@ const sampleItinerary = {
       legGeometry: 'ceztG`trkV?s@?U?O@eA?kADW?M?OEa@?{@?}',
       legRouteShortName: '20',
       legRouteLongName: 'Burnside/Stark'
-    }}
+    }
+  }
 
-}
+};
 
 const sampleGeojson = {
   id: 0,
   geojson: {
     0: {
-      type: "LineString",
+      type: 'LineString',
       coordinates:
-      [
-        [-122.65359, 45.53008],
-        [-122.65364, 45.53008]
-      ]
+        [
+          [-122.65359, 45.53008],
+          [-122.65364, 45.53008]
+        ]
     },
     1: {
-      type: "LineString",
+      type: 'LineString',
       coordinates:
-      [
-        [-122.42665, 45.50247],
-        [-122.42697, 45.50254],
-        [-122.42698, 45.5025],
-        [-122.42662, 45.50243],
-        [-122.42632, 45.5024],
-        [-122.42633, 45.50244]
-      ]
+        [
+          [-122.42665, 45.50247],
+          [-122.42697, 45.50254],
+          [-122.42698, 45.5025],
+          [-122.42662, 45.50243],
+          [-122.42632, 45.5024],
+          [-122.42633, 45.50244]
+        ]
     }
   }
-}
+};
 
 
 describe('rootReducer', () => {
@@ -92,8 +93,8 @@ describe('rootReducer', () => {
   });
 
   test('should contain geojsonByIdReducer logic', () => {
-    expect(store.getState(). geojsonById).toEqual(geojsonByIdReducer(undefined, { type: null}));
-  })
+    expect(store.getState().geojsonById).toEqual(geojsonByIdReducer(undefined, { type: null }));
+  });
 });
 
 
@@ -104,7 +105,7 @@ describe('searchParamsReducer', () => {
   });
 
   test('should successfully add new search parameters to searchParams state slice', () => {
-    const { toPlace, fromPlace, departOrArrive, date, distance, id} = sampleSearchParams;
+    const { toPlace, fromPlace, departOrArrive, date, distance, id } = sampleSearchParams;
     action = {
       type: types.ADD_SEARCH_PARAMS,
       toPlace: toPlace,
@@ -114,7 +115,7 @@ describe('searchParamsReducer', () => {
       id: id
     };
     expect(searchParamsReducer({}, action)).toEqual({
-      [id] : {
+      [id]: {
         toPlace: toPlace,
         fromPlace: fromPlace,
         departOrArrive: departOrArrive,
@@ -140,7 +141,7 @@ describe('itinerariesByIdReducer', () => {
       id: id
     };
     expect(itinerariesByIdReducer({}, action)).toEqual({
-      [id]:{
+      [id]: {
         legs: {
           0: {
             legMode: 'BICYCLE',
@@ -166,9 +167,9 @@ describe('itinerariesByIdReducer', () => {
           }
         }
       }
-    })
-  })
-})
+    });
+  });
+});
 
 describe('geojsonByIdReducer', () => {
   test('should return default state if no action type is recognized', () => {
@@ -182,33 +183,33 @@ describe('geojsonByIdReducer', () => {
       type: types.ADD_GEOJSON,
       geojson: geojson,
       id: id
-    }
+    };
     expect(geojsonByIdReducer({}, action)).toEqual({
-      [id] : {
+      [id]: {
         geojson: {
           0: {
-            type: "LineString",
+            type: 'LineString',
             coordinates:
-            [
-              [-122.65359, 45.53008],
-              [-122.65364, 45.53008]
+              [
+                [-122.65359, 45.53008],
+                [-122.65364, 45.53008]
 
-            ]
+              ]
           },
           1: {
-            type: "LineString",
+            type: 'LineString',
             coordinates:
-            [
-              [-122.42665, 45.50247],
-              [-122.42697, 45.50254],
-              [-122.42698, 45.5025],
-              [-122.42662, 45.50243],
-              [-122.42632, 45.5024],
-              [-122.42633, 45.50244]
-            ]
+              [
+                [-122.42665, 45.50247],
+                [-122.42697, 45.50254],
+                [-122.42698, 45.5025],
+                [-122.42662, 45.50243],
+                [-122.42632, 45.5024],
+                [-122.42633, 45.50244]
+              ]
           }
         }
       }
-    })
-  })
-})
+    });
+  });
+});

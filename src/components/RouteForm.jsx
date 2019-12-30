@@ -7,7 +7,6 @@ import { addSearchParams, processUserInputForAPICall } from './../actions';
 const FormStyles = styled.div`
   display: flex;
   flex-direction: column;
-
 `;
 
 const TimeLine = styled.div`
@@ -43,7 +42,7 @@ const StyledText = styled.p`
   margin-left 1rem;
 `;
 
-function RouteForm({ dispatch, onFormSubmission}) {
+function RouteForm({ dispatch, toggleForm }) {
 
   let _toPlace = null;
   let _fromPlace = null;
@@ -52,7 +51,7 @@ function RouteForm({ dispatch, onFormSubmission}) {
   let _distance = null;
   let _time = null;
 
-  return(
+  return (
     <FormStyles>
       <h3>Plan a route:</h3>
       <form onSubmit={e => {
@@ -60,14 +59,14 @@ function RouteForm({ dispatch, onFormSubmission}) {
         const input = {
           toPlace: _toPlace.value,
           fromPlace: _fromPlace.value,
-          departOrArrive:  _departOrArrive.value,
+          departOrArrive: _departOrArrive.value,
           date: _date.value,
-          distance:  _distance.value,
+          distance: _distance.value,
           time: _time.value
         };
         dispatch(addSearchParams(input));
         processUserInputForAPICall(input, dispatch);
-        onFormSubmission();
+        toggleForm(true);
         _toPlace = '';
         _fromPlace = '';
         _date = '';
@@ -78,38 +77,38 @@ function RouteForm({ dispatch, onFormSubmission}) {
           type='text'
           id='start'
           placeholder='Start address'
-          ref={(input)=> {_toPlace = input;}}/>
-        <br/>
+          ref={(input) => { _toPlace = input; }} />
+        <br />
         <StyledInput
           type='text'
           id='end'
           placeholder='Destination address'
-          ref={(input)=> {_fromPlace = input;}}/>
-        <br/>
+          ref={(input) => { _fromPlace = input; }} />
+        <br />
         <TimeLine>
-          <StyledSelect ref={(option)=> {_departOrArrive = option;}}>
+          <StyledSelect ref={(option) => { _departOrArrive = option; }}>
             <option value="false">Depart</option>
-            <option value ="true">Arrive</option>
+            <option value="true">Arrive</option>
           </StyledSelect>
           <StyledText>by</StyledText>
           <StyledTime
             type='time'
             id='time'
             placeholder='9:00'
-            ref={(input) => {_time = input;}}/>
+            ref={(input) => { _time = input; }} />
           <StyledText>on</StyledText>
         </TimeLine>
         <TimeLine>
           <StyledInput
             type='date'
             id='date'
-            ref={(input)=> {_date = input;}}/>
+            ref={(input) => { _date = input; }} />
         </TimeLine>
         <StyledInput
           type='number'
           id='miles'
           placeholder='Maximum miles biked'
-          ref={(input)=> {_distance = input;}}/>
+          ref={(input) => { _distance = input; }} />
         <br />
         <button type='submit'>Find Route</button>
       </form>
@@ -121,7 +120,7 @@ function RouteForm({ dispatch, onFormSubmission}) {
 
 RouteForm.propTypes = {
   dispatch: PropTypes.func,
-  onFormSubmission: PropTypes.func
+  toggleForm: PropTypes.func
 };
 
 export default connect()(RouteForm);

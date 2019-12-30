@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import RouteForm from './RouteForm';
 import styled from 'styled-components';
+import RouteForm from './RouteForm';
 import ResultList from './ResultList';
+
 
 const SidebarStyles = styled.div`
   display: flex;
@@ -15,15 +16,13 @@ const SidebarStyles = styled.div`
 
 const Sidebar = () => {
   const [results, setResults] = useState(false);
-
-  const handleHideForm = () => setResults(true);
+  const toggleForm = (bool) => setResults(bool);
 
   return (
     <SidebarStyles>
-      {results ? <ResultList /> : <RouteForm onFormSubmission={handleHideForm} />}
+      {results ? <ResultList toggleForm={toggleForm} /> : <RouteForm toggleForm={toggleForm} />}
     </SidebarStyles>
   );
-
 };
 
 export default Sidebar;

@@ -12,6 +12,9 @@ const geojsonByIdReducer = (state = initialState.geojsonById, action) => {
       }
     });
     return newState;
+  case types.CLEAR_GEOJSON:
+    newState = {};
+    return newState;
   default:
     return state;
   }

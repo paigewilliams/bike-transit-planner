@@ -19,6 +19,9 @@ const searchParamsReducer = (state = initialState.searchParams, action) => {
       }
     });
     return newState;
+  case types.CLEAR_SEARCH_PARAMS:
+    newState = {};
+    return newState;
   default:
     return state;
   }

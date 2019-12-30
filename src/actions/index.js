@@ -13,17 +13,23 @@ export const addSearchParams = ({ toPlace, fromPlace, departOrArrive, date, dist
   id: v4()
 });
 
+export const clearSearchParams = () => ({ type: types.CLEAR_SEARCH_PARAMS });
+
 export const addItineraryById = (legs, id) => ({
   type: types.ADD_ITINERARY,
   legs: legs,
   id: id
 });
 
+export const clearItinerary = () => ({ type: types.CLEAR_ITINERARY });
+
 export const addGeojsonById = (geojson, id) => ({
   type: types.ADD_GEOJSON,
   geojson: geojson,
   id: id
 });
+
+export const clearGeojson = () => ({ type: types.CLEAR_GEOJSON });
 
 function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }, dispatch) {
   const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
@@ -33,7 +39,6 @@ function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceFo
       .then((response) => response.json(),
         error => console.log('an error occured', error))
       .then((json) => {
-        console.log('json', json);
         cleanCoords.push(json.results[0].geometry.location);
         if (cleanCoords.length === 2) {
           fetchRoute({ distance, cleanCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }, dispatch);

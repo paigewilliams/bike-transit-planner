@@ -74,13 +74,15 @@ module.exports = {
   },
 
   plugins: [
-    new Dotenv(),
+    new Dotenv({
+      systemvars: true
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new HtmlWebpackPlugin({
       template: 'template.ejs',
       appMountId: 'react-app-root',
-      title: 'Google Maps',
+      title: 'Bike and Transit Planner',
       filename: resolve(__dirname, 'build', 'index.html'),
     }),
   ]

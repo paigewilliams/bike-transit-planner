@@ -9,15 +9,15 @@ import middlewareLogger from './middleware/middleware-logger';
 
 const store = createStore(rootReducer, applyMiddleware(middlewareLogger, thunkMiddleware));
 
-let unsubscribe = store.subscribe(() => {
-  console.log(store.getState());
-});
+// let unsubscribe = store.subscribe(() => {
+//   console.log(store.getState());
+// });
 
 
 const render = (Component) => {
   ReactDOM.render(
     <Provider store={store}>
-      <Component/>
+      <Component />
     </Provider>,
     document.getElementById('react-app-root')
   );

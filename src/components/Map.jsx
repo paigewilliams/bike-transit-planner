@@ -1,105 +1,81 @@
 import React from 'react';
 import styled from 'styled-components';
-import mapboxgl from 'mapbox-gl';
+import { StaticMap } from 'react-map-gl';
 import { connect } from 'react-redux';
+import DeckGL, { GeoJsonLayer } from 'deck.gl';
 import v4 from 'uuid/v4';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
-mapboxgl.accessToken = process.env.API_KEY;
+const width = '100%';
+const height = '90vh';
 
 const MapStyles = styled.div`
-  height: 100%;
-  width: 100%;
+  position: relative;
 `;
 
-class Map extends React.Component {
-  map;
-  constructor(props){
-    super(props);
-    this.state = {
-      lat: 45.5122,
-      lng: -122.6587,
-      zoom: 11
-    };
-  }
+const initalViewport = {
+  latitude: 45.5122,
+  longitude: -122.6587,
+  zoom: 10,
+  bearing: 0,
+  pitch: 0,
+  width: '100%',
+  height: '100vh',
+};
 
-  componentDidMount(){
-    const { lat, lng, zoom } = this.state;
-    this.map = new mapboxgl.Map({
-      container: this.mapContainer,
-      style: 'mapbox://styles/mapbox/light-v9',
-      center: [lng, lat],
-      zoom
-    });
-    this.map.on('move', () => {
-      const { lng, lat } = this.map.getCenter();
-      this.setState({
-        lng: lng.toFixed(4),
-        lat: lat.toFixed(4),
-        zoom: this.map.getZoom().toFixed(2)
-      });
-    });
-  }
+const modeColors = {
+  BICYCLE: [255, 165, 71],
+  WALK: [52, 187, 98],
+  TRAM: [255, 100, 71],
+  BUS: [49, 132, 159],
+};
 
-  componentDidUpdate(){
-    const { data, itineraries } = this.props;
-    if(Object.keys(itineraries).length > 0 && Object.keys(data).length > 0){
-      Object.keys(data, itineraries).map((id) => {
-        let legs = data[id].geojson;
-        let itineraryMode = itineraries[id].legs;
-        let mapComponent = this.map;
-        legs.forEach((leg, i) => {
-          mapComponent.addLayer({
-            'id': v4(),
-            'type': 'line',
-            'source': {
-              'type': 'geojson',
-              'data': {
-                'type': 'Feature',
-                'properties': {
-                  'mode' : itineraryMode[i].legMode
-                },
-                'geometry': leg
-              }
+const MapContainer = ({ data }) => {
+
+  const renderLayers = () => {
+    if (Object.keys(data).length) {
+      return Object.keys(data).map(id => {
+        const route = data[id].geojson;
+        return [
+          new GeoJsonLayer({
+            id: 'geojson',
+            data: route,
+            stroked: false,
+            filled: true,
+            lineWidthMinPixels: 0.5,
+            parameters: {
+              depthTest: false
             },
-            'layout': {
-              'line-cap': 'round',
-              'line-cap': 'round'
-            },
-            'paint': {
-              'line-color': [
-                'match',
-                ['get', 'mode'],
-                'BICYCLE', '#FFA547',
-                'WALK', '#34BB62',
-                'TRAM', '#FF6447',
-                'BUS', '#31849F',
-                '#ccc'
-              ],
-              'line-width': 4
-            }
-          });
-        });
+            getLineColor: f => modeColors[f.properties.mode],
+            getLineWidth: () => 50,
+            pickable: true,
+          })
+        ];
       });
-
-
     }
-  }
+  };
 
-  render(){
-    const { lng, lat, zoom } = this.state;
-    return(
-      <div>
-        <MapStyles ref={el => this.mapContainer = el}  />
-      </div>
-    );
-  }
-}
+
+  return (
+    <MapStyles>
+      <DeckGL width={width} height={height} initialViewState={initalViewport} layers={renderLayers()} controller={true}>
+        <StaticMap
+          key={v4()}
+          reuseMaps
+          preventStyleDiffing={true}
+          mapStyle='mapbox://styles/mapbox/light-v9'
+          mapboxApiAccessToken={process.env.API_KEY}
+        />
+      </DeckGL>
+    </MapStyles >
+  );
+};
 
 const mapStateToProps = state => {
   return {
     data: state.geojsonById,
     itineraries: state.itinerariesById
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps)(Map);
+export default connect(mapStateToProps)(MapContainer);

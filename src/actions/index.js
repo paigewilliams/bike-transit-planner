@@ -122,9 +122,14 @@ export function parseRouteData(itinerary, dispatch) {
 }
 
 function createGeojson(legs, newId, dispatch) {
-  const decodedLines = legs.map(function (leg) {
-    const newLine = polyline.toGeoJSON(leg.legGeometry);
-    return newLine;
+  const decodedLines = legs.map((leg) => {
+    return {
+      type: 'Feature',
+      geometry: polyline.toGeoJSON(leg.legGeometry),
+      properties: { mode: leg.legMode }
+    };
+
   });
-  dispatch(addGeojsonById(decodedLines, newId));
+  const featureCollection = { type: 'FeatureCollection', features: decodedLines };
+  dispatch(addGeojsonById(featureCollection, newId));
 }

@@ -44,7 +44,7 @@ const ResultList = ({ itineraries, dispatch, toggleForm }) => {
         <div>
           <h3>Loading...</h3>
         </div>
-      }}
+      }
     </ResultListStyles>
   );
 };

@@ -3,7 +3,7 @@
 # Contributors
 ### Paige Williams  
 
-
+[![Netlify Status](https://api.netlify.com/api/v1/badges/bc82a6bf-da09-44dd-8f5a-7dd0043cdbe7/deploy-status)](https://app.netlify.com/sites/hopeful-ritchie-ef1bcf/deploys)
 ## Description
 A web application that helps people in Portland plan their multi-modal trips. The user is able to enter their start and end point, and how many miles they would like to bike. After entering their search, the user can see routes on a map that fit thier criteria. In future iterations I would like to add user authentication and have the user be able to save their search results. I would also like to add metrics on how many miles they biked and the carbon footprint of their route.
 
@@ -51,6 +51,7 @@ View the plan [here.](https://github.com/paigewilliams/capstone-planning)
 * Redux
 * Styled Components
 * Jest
+* Deck.GL
 * [Trimet Trip Planner API](https://developer.trimet.org/ws_docs/tripplanner_ws.shtml)
 * [Mapbox](https://www.mapbox.com/)
 * Icons from [Good Ware](https://www.flaticon.com/packs/transportation-46)
@@ -63,6 +64,8 @@ View the plan [here.](https://github.com/paigewilliams/capstone-planning)
 * Create a `.env` file in the root of the directory
 * Generate a Mapbox access token
 * Save your access token as `API_KEY` in the `.env` file
+* Generate a Google Maps geocoder access token
+* Save your access token as `GOOGLE_KEY` in the `.env` file
 * Run `npm install` to install dependencies
 * Run `npm run start` to build and serve the project
 * View the project in any browser at `http://localhost:8080/`

@@ -9,16 +9,15 @@ const Time = styled.p`
 `;
 
 const Mode = styled.span`
-  color: ${props => (props.mode === 'BICYCLE') ? '#FFA547' : (props.mode === 'WALK') ? '#34BB62' : (props.mode === 'TRAM') ? '#FF6447' : (props.mode === 'BUS') ? '#31849F' : '#ccc' }
-`
-function Result({ mode, legToName, distance, routeLongName, routeShortName, legStartTime, legToStopId, legFromName}){
+  color: ${props => (props.mode === 'BICYCLE') ? '#FFA547' : (props.mode === 'WALK') ? '#34BB62' : (props.mode === 'TRAM') ? '#FF6447' : (props.mode === 'BUS') ? '#31849F' : '#ccc'}
+`;
+function Result({ mode, legToName, distance, routeLongName, routeShortName, legToStopId, legFromName }) {
 
   distance = Math.round((distance * 0.00062137) * 100) / 100;
   let routeData;
-  let stopData
-  if(routeLongName && routeShortName !== null){
-    routeData =  `${routeShortName} to ${routeLongName} stop ID: ${legToStopId} `;
-  } else if (routeLongName !== null){
+  if (routeLongName && routeShortName !== null) {
+    routeData = `${routeShortName} to ${routeLongName} stop ID: ${legToStopId} `;
+  } else if (routeLongName !== null) {
     routeData = `${routeLongName}`;
   }
 
@@ -41,6 +40,8 @@ Result.propTypes = {
   legStartTime: PropTypes.number,
   legFromTime: PropTypes.string,
   legToStopId: PropTypes.string,
+  legToName: PropTypes.string,
+  legFromName: PropTypes.string,
 };
 
 export default Result;

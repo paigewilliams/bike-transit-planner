@@ -21,6 +21,8 @@ export const addItineraryById = (legs, id) => ({
   id: id
 });
 
+export const errorItinerary = (error) => ({ type: types.ERROR_ITINERARY, error: error });
+
 export const clearItinerary = () => ({ type: types.CLEAR_ITINERARY });
 
 export const addGeojsonById = (geojson, id) => ({
@@ -84,8 +86,11 @@ export function fetchRoute(data, dispatch) {
     response => response.json(),
     error => console.log('an error occured', error))
     .then(json => {
+      if (json.error) {
+        return dispatch(errorItinerary(json.error.msg));
+      }
       const itinerary = json.plan.itineraries[0].legs;
-      parseRouteData(itinerary, dispatch);
+      return parseRouteData(itinerary, dispatch);
     });
 }
 

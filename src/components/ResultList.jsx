@@ -24,7 +24,7 @@ const ResultList = ({ itineraries, dispatch, toggleForm }) => {
   return (
     <ResultListStyles>
       <ReturnButton onClick={() => clearForm()}>Return to form</ReturnButton>
-      {(Object.keys(itineraries).length > 0 && itineraries.constructor === Object) ?
+      {(Object.keys(itineraries).length > 0 && itineraries.constructor === Object && !itineraries.error) &&
         Object.keys(itineraries).map(id => {
           let itinerary = itineraries[id].legs;
           return itinerary.map((leg, index) => {
@@ -40,12 +40,20 @@ const ResultList = ({ itineraries, dispatch, toggleForm }) => {
               key={index} />;
           });
         })
-        :
+      }
+      {itineraries.error && (
+        <div>
+          <h3>{itineraries.error}</h3>
+        </div>
+      )}
+      {Object.keys(itineraries).length <= 0 && (
         <div>
           <h3>Loading...</h3>
         </div>
+      )
+
       }
-    </ResultListStyles>
+    </ResultListStyles >
   );
 };
 

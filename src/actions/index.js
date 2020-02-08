@@ -21,6 +21,8 @@ export const addItineraryById = (legs, id) => ({
   id: id
 });
 
+export const errorItinerary = (error) => ({ type: types.ERROR_ITINERARY, error: error });
+
 export const clearItinerary = () => ({ type: types.CLEAR_ITINERARY });
 
 export const addGeojsonById = (geojson, id) => ({
@@ -35,11 +37,11 @@ function fetchCoords({ distance, toPlaceForCoords, fromPlaceForCoords, toPlaceFo
   const placesForCoords = [toPlaceForCoords, fromPlaceForCoords];
   let cleanCoords = [];
   placesForCoords.forEach(function (place) {
-    fetch('https://maps.googleapis.com/maps/api/geocode/json?address=' + place + '&key=' + process.env.GOOGLE_KEY)
+    fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/' + place + '.json?country=US&access_token=' + process.env.API_KEY)
       .then((response) => response.json(),
         error => console.log('an error occured', error))
       .then((json) => {
-        cleanCoords.push(json.results[0].geometry.location);
+        cleanCoords.push(json.features[0].center);
         if (cleanCoords.length === 2) {
           fetchRoute({ distance, cleanCoords, toPlaceForTrimet, fromPlaceForTrimet, departOrArrive, time, date }, dispatch);
         }
@@ -79,12 +81,16 @@ function militaryToStandardTime(time) {
 
 export function fetchRoute(data, dispatch) {
   const { departOrArrive, distance, fromPlaceForTrimet, cleanCoords, time, toPlaceForTrimet, date } = data;
-  return fetch('https://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy=' + departOrArrive + '&time=' + time + '&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance=' + distance + '&date=' + date + '&toPlace=' + fromPlaceForTrimet + '%3A%3A' + cleanCoords[1].lat + '%2C' + cleanCoords[1].lng + '&fromPlace=' + toPlaceForTrimet + '%3A%3A' + cleanCoords[0].lat + '%2C' + cleanCoords[0].lng + '').then(
+
+  return fetch('https://ride.trimet.org/prod?triangleTimeFactor=0&triangleSlopeFactor=0&triangleSafetyFactor=1&maxTransfers=3&_dc=1552071236583&from=&to=&arriveBy=' + departOrArrive + '&time=' + time + '&mode=TRANSIT%2CBICYCLE&optimize=TRIANGLE&maxWalkDistance=' + distance + '&date=' + date + '&toPlace=' + fromPlaceForTrimet + '%3A%3A' + cleanCoords[0][1] + '%2C' + cleanCoords[0][0] + '&fromPlace=' + toPlaceForTrimet + '%3A%3A' + cleanCoords[1][1] + '%2C' + cleanCoords[1][0] + '').then(
     response => response.json(),
     error => console.log('an error occured', error))
     .then(json => {
+      if (json.error) {
+        return dispatch(errorItinerary(json.error.msg));
+      }
       const itinerary = json.plan.itineraries[0].legs;
-      parseRouteData(itinerary, dispatch);
+      return parseRouteData(itinerary, dispatch);
     });
 }
 
